@@ -1,0 +1,163 @@
+=== Valgrind 메모리 분석 시작 ===
+실행 명령어: valgrind ./mdriver -V -f short1-bal.rep
+
+./debug_valgrind.sh: line 5: 52715 Segmentation fault      valgrind --tool=memcheck --track-origins=yes --show-leak-kinds=all --verbose --num-callers=20 --show-below-main=yes --error-limit=no --log-file=log/valgrind_raw.txt ./mdriver -V -f short1-bal.rep
+💥 Segmentation Fault 발생 (SIGSEGV)
+
+========================================
+🚨 크리티컬 에러 (CRITICAL ERRORS) - 반드시 해결 필요!
+========================================
+🔴 메모리 경계 위반 (Invalid Memory Access):
+==52715==    by 0x1091AF: _start (in /workspaces/malloc_lab_docker/malloc-lab/mdriver)
+==52715== 
+==52715== Invalid read of size 8
+==52715==    at 0x10BF60: get_value (mm_utils.c:30)
+==52715==    by 0x10BFD7: get_size (mm_block.c:15)
+==52715==    by 0x10BFD7: get_footer_pointer (mm_block.c:46)
+==52715==    by 0x10BF17: coalesce (mm.c:240)
+==52715==    by 0x10BBA3: mm_free (mm.c:141)
+==52715==    by 0x10A8FF: eval_mm_valid (mdriver.c:725)
+==52715==    by 0x10995B: main (mdriver.c:321)
+==52715==    by 0x48E84C3: __libc_start_call_main (libc_start_call_main.h:58)
+--
+==52715== 
+==52715== 1 errors in context 1 of 7:
+==52715== Invalid read of size 8
+==52715==    at 0x10BF60: get_value (mm_utils.c:30)
+==52715==    by 0x10BFD7: get_size (mm_block.c:15)
+==52715==    by 0x10BFD7: get_footer_pointer (mm_block.c:46)
+==52715==    by 0x10BF17: coalesce (mm.c:240)
+==52715==    by 0x10BBA3: mm_free (mm.c:141)
+==52715==    by 0x10A8FF: eval_mm_valid (mdriver.c:725)
+==52715==    by 0x10995B: main (mdriver.c:321)
+==52715==    by 0x48E84C3: __libc_start_call_main (libc_start_call_main.h:58)
+
+💀 프로그램 크래시 정보:
+==52715==    by 0x48E8597: __libc_start_main@@GLIBC_2.34 (libc-start.c:360)
+==52715==    by 0x1091AF: _start (in /workspaces/malloc_lab_docker/malloc-lab/mdriver)
+==52715==  Address 0x303030307eb03f8 is not stack'd, malloc'd or (recently) free'd
+==52715== 
+==52715== 
+==52715== Process terminating with default action of signal 11 (SIGSEGV)
+==52715==  Access not within mapped region at address 0x3030307EB03F8
+==52715==    at 0x10BF60: get_value (mm_utils.c:30)
+==52715==    by 0x10BFD7: get_size (mm_block.c:15)
+==52715==    by 0x10BFD7: get_footer_pointer (mm_block.c:46)
+==52715==    by 0x10BF17: coalesce (mm.c:240)
+==52715==    by 0x10BBA3: mm_free (mm.c:141)
+==52715==    by 0x10A8FF: eval_mm_valid (mdriver.c:725)
+==52715==    by 0x10995B: main (mdriver.c:321)
+==52715==    by 0x48E84C3: __libc_start_call_main (libc_start_call_main.h:58)
+==52715==    by 0x48E8597: __libc_start_main@@GLIBC_2.34 (libc-start.c:360)
+==52715==    by 0x1091AF: _start (in /workspaces/malloc_lab_docker/malloc-lab/mdriver)
+==52715==  If you believe this happened as a result of a stack
+==52715==  overflow in your program's main thread (unlikely but
+==52715==  possible), you can try to increase the size of the
+==52715==  main thread stack using the --main-stacksize= flag.
+==52715==  The main thread stack size used in this run was 8388608.
+
+
+========================================
+⚠️  경고 (WARNINGS) - 성능/안정성 개선 권장
+========================================
+🟡 초기화되지 않은 값 사용:
+--52715-- REDIR: 0x4956eb0 (libc.so.6:free) redirected to 0x4888230 (free)
+--52715-- REDIR: 0x4962b80 (libc.so.6:__GI_memset) redirected to 0x4891f00 (memset)
+==52715== Use of uninitialised value of size 8
+==52715==    at 0x10BF60: get_value (mm_utils.c:30)
+==52715==    by 0x10BFD7: get_size (mm_block.c:15)
+==52715==    by 0x10BFD7: get_footer_pointer (mm_block.c:46)
+==52715==    by 0x10BDB3: coalesce (mm.c:215)
+==52715==    by 0x10BBA3: mm_free (mm.c:141)
+==52715==    by 0x10A8FF: eval_mm_valid (mdriver.c:725)
+==52715==    by 0x10995B: main (mdriver.c:321)
+==52715==    by 0x48E84C3: __libc_start_call_main (libc_start_call_main.h:58)
+--
+==52715==    by 0x1091AF: _start (in /workspaces/malloc_lab_docker/malloc-lab/mdriver)
+==52715== 
+==52715== Use of uninitialised value of size 8
+==52715==    at 0x10BF60: get_value (mm_utils.c:30)
+==52715==    by 0x10BF9B: is_allocated (mm_block.c:25)
+==52715==    by 0x10BDB7: coalesce (mm.c:215)
+==52715==    by 0x10BBA3: mm_free (mm.c:141)
+==52715==    by 0x10A8FF: eval_mm_valid (mdriver.c:725)
+==52715==    by 0x10995B: main (mdriver.c:321)
+==52715==    by 0x48E84C3: __libc_start_call_main (libc_start_call_main.h:58)
+==52715==    by 0x48E8597: __libc_start_main@@GLIBC_2.34 (libc-start.c:360)
+--
+==52715==    by 0x1091AF: _start (in /workspaces/malloc_lab_docker/malloc-lab/mdriver)
+==52715== 
+==52715== Use of uninitialised value of size 8
+==52715==    at 0x10BF60: get_value (mm_utils.c:30)
+==52715==    by 0x10BF7B: get_size (mm_block.c:15)
+==52715==    by 0x10BED3: coalesce (mm.c:238)
+
+🟡 가능한 메모리 누수:
+==52715==      possibly lost: 0 bytes in 0 blocks
+==52715==    still reachable: 20,975,983 bytes in 10 blocks
+==52715==         suppressed: 0 bytes in 0 blocks
+==52715== Rerun with --leak-check=full to see details of leaked memory
+==52715== 
+==52715== ERROR SUMMARY: 22 errors from 7 contexts (suppressed: 0 from 0)
+
+
+========================================
+💧 메모리 누수 분석
+========================================
+🔴 확실한 메모리 누수 (해결 필요):
+==52715==    definitely lost: 0 bytes in 0 blocks
+==52715==    indirectly lost: 0 bytes in 0 blocks
+==52715==      possibly lost: 0 bytes in 0 blocks
+
+📊 메모리 사용 요약:
+==52715== HEAP SUMMARY:
+==52715==     in use at exit: 20,975,983 bytes in 10 blocks
+==52715==   total heap usage: 16 allocs, 6 frees, 20,980,647 bytes allocated
+==52715== 
+==52715== Searching for pointers to 10 not-freed blocks
+==52715== Checked 112,008 bytes
+==52715== 
+==52715== LEAK SUMMARY:
+==52715==    definitely lost: 0 bytes in 0 blocks
+==52715==    indirectly lost: 0 bytes in 0 blocks
+==52715==      possibly lost: 0 bytes in 0 blocks
+==52715==    still reachable: 20,975,983 bytes in 10 blocks
+==52715==         suppressed: 0 bytes in 0 blocks
+==52715== Rerun with --leak-check=full to see details of leaked memory
+==52715== 
+==52715== ERROR SUMMARY: 22 errors from 7 contexts (suppressed: 0 from 0)
+==52715== 
+==52715== 1 errors in context 1 of 7:
+==52715== Invalid read of size 8
+==52715==    at 0x10BF60: get_value (mm_utils.c:30)
+==52715==    by 0x10BFD7: get_size (mm_block.c:15)
+==52715==    by 0x10BFD7: get_footer_pointer (mm_block.c:46)
+==52715==    by 0x10BF17: coalesce (mm.c:240)
+
+========================================
+📊 심각도별 통계
+========================================
+📁 원본 로그: log/valgrind_raw.txt (360 줄)
+📁 분석 결과: log/valgrind_output.txt
+
+🚨 크리티컬 에러 (반드시 수정):
+   🔴 메모리 경계 위반: 2
+   💀 프로그램 크래시: 1
+   ⚡ 메모리 손상: 0
+
+⚠️  경고 (개선 권장):
+   🟡 초기화 안된 값: 12
+   🟡 조건부 분기 문제: 0
+   🟡 일반 경고: 0
+
+💧 메모리 누수:
+   🔴 확실한 누수: 1
+   🟡 가능한 누수: 1
+
+🚨 우선순위 1: 크리티컬 에러 3개를 먼저 해결하세요!
+🔍 추천 디버깅 단계:
+1. gdb ./mdriver  # GDB로 크래시 위치 정확히 찾기
+2. (gdb) run -V -f short1-bal.rep
+3. (gdb) bt  # 스택 트레이스 확인
+
+=== 분석 완료 ===

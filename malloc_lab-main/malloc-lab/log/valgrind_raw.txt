@@ -1,0 +1,360 @@
+==52715== Memcheck, a memory error detector
+==52715== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==52715== Using Valgrind-3.22.0-bd4db67b1d-20231031 and LibVEX; rerun with -h for copyright info
+==52715== Command: ./mdriver -V -f short1-bal.rep
+==52715== Parent PID: 52713
+==52715== 
+--52715-- 
+--52715-- Valgrind options:
+--52715--    --tool=memcheck
+--52715--    --track-origins=yes
+--52715--    --show-leak-kinds=all
+--52715--    --verbose
+--52715--    --num-callers=20
+--52715--    --show-below-main=yes
+--52715--    --error-limit=no
+--52715--    --log-file=log/valgrind_raw.txt
+--52715-- Contents of /proc/version:
+--52715--   Linux version 6.10.14-linuxkit (root@buildkitsandbox) (gcc (Alpine 13.2.1_git20240309) 13.2.1 20240309, GNU ld (GNU Binutils) 2.42) #1 SMP Tue Oct 14 07:32:13 UTC 2025
+--52715-- 
+--52715-- Arch and hwcaps: ARM64, LittleEndian, v8-fhm-dpbcvadp-sha3-rdm-atomics-fp16-vfp16
+--52715-- Page sizes: currently 4096, max supported 65536
+--52715-- Valgrind library directory: /usr/libexec/valgrind
+--52715-- Reading syms from /workspaces/malloc_lab_docker/malloc-lab/mdriver
+--52715-- Reading syms from /usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1
+--52715--   Considering /usr/lib/debug/.build-id/0b/5641a66fb60a63d55da0cb8f06b878c5b0102e.debug ..
+--52715--   .. build-id is valid
+--52715-- Reading syms from /usr/libexec/valgrind/memcheck-arm64-linux
+--52715--    object doesn't have a dynamic symbol table
+--52715-- Scheduler: using generic scheduler lock implementation.
+--52715-- Reading suppressions file: /usr/libexec/valgrind/default.supp
+==52715== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-52715-by-???-on-0ee57c93245b
+==52715== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-52715-by-???-on-0ee57c93245b
+==52715== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-52715-by-???-on-0ee57c93245b
+==52715== 
+==52715== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==52715== don't want to do, unless you know exactly what you're doing,
+==52715== or are doing some strange experiment):
+==52715==   /usr/bin/vgdb --pid=52715 ...command...
+==52715== 
+==52715== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==52715==   /path/to/gdb ./mdriver
+==52715== and then give GDB the following command
+==52715==   target remote | /usr/bin/vgdb --pid=52715
+==52715== --pid is optional if only one valgrind process is running
+==52715== 
+--52715-- REDIR: 0x401cb00 (ld-linux-aarch64.so.1:strlen) redirected to 0x580c3d5c (???)
+--52715-- REDIR: 0x401c040 (ld-linux-aarch64.so.1:strcmp) redirected to 0x580c3db0 (???)
+--52715-- REDIR: 0x401bf80 (ld-linux-aarch64.so.1:index) redirected to 0x580c3d84 (???)
+--52715-- Reading syms from /usr/libexec/valgrind/vgpreload_core-arm64-linux.so
+--52715-- Reading syms from /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so
+--52715-- Reading syms from /usr/lib/aarch64-linux-gnu/libc.so.6
+--52715--   Considering /usr/lib/debug/.build-id/d6/c205bda1b6e91815f8fef45bdf56bc2239c37e.debug ..
+--52715--   .. build-id is valid
+--52715-- REDIR: 0x495a8d0 (libc.so.6:memchr) redirected to 0x4850710 (_vgnU_ifunc_wrapper)
+--52715-- REDIR: 0x495e120 (libc.so.6:strlen) redirected to 0x4850710 (_vgnU_ifunc_wrapper)
+--52715-- REDIR: 0x495ab10 (libc.so.6:memcpy) redirected to 0x4850710 (_vgnU_ifunc_wrapper)
+--52715-- REDIR: 0x495b480 (libc.so.6:memset) redirected to 0x4850710 (_vgnU_ifunc_wrapper)
+--52715-- REDIR: 0x495e6c0 (libc.so.6:rindex) redirected to 0x488d470 (rindex)
+--52715-- REDIR: 0x4963140 (libc.so.6:__GI_strlen) redirected to 0x488dcd0 (__GI_strlen)
+--52715-- REDIR: 0x495e2e4 (libc.so.6:strncmp) redirected to 0x488e550 (strncmp)
+--52715-- REDIR: 0x495c200 (libc.so.6:index) redirected to 0x488d730 (index)
+--52715-- REDIR: 0x495c2c0 (libc.so.6:strchrnul) redirected to 0x4892a70 (strchrnul)
+--52715-- REDIR: 0x4961a80 (libc.so.6:__GI_memcpy) redirected to 0x488fdb0 (__GI_memcpy)
+--52715-- REDIR: 0x49565b0 (libc.so.6:malloc) redirected to 0x48851d0 (malloc)
+--52715-- REDIR: 0x4957160 (libc.so.6:realloc) redirected to 0x488c250 (realloc)
+--52715-- REDIR: 0x49b8ab0 (libc.so.6:__memcpy_chk) redirected to 0x4893260 (__memcpy_chk)
+--52715-- REDIR: 0x49579d0 (libc.so.6:calloc) redirected to 0x488c000 (calloc)
+--52715-- REDIR: 0x495d380 (libc.so.6:strcpy) redirected to 0x488deb0 (strcpy)
+--52715-- REDIR: 0x495c1c0 (libc.so.6:strcat) redirected to 0x488d8c0 (strcat)
+--52715-- REDIR: 0x495ef00 (libc.so.6:strstr) redirected to 0x4893370 (strstr)
+--52715-- REDIR: 0x4956eb0 (libc.so.6:free) redirected to 0x4888230 (free)
+--52715-- REDIR: 0x4962b80 (libc.so.6:__GI_memset) redirected to 0x4891f00 (memset)
+==52715== Use of uninitialised value of size 8
+==52715==    at 0x10BF60: get_value (mm_utils.c:30)
+==52715==    by 0x10BFD7: get_size (mm_block.c:15)
+==52715==    by 0x10BFD7: get_footer_pointer (mm_block.c:46)
+==52715==    by 0x10BDB3: coalesce (mm.c:215)
+==52715==    by 0x10BBA3: mm_free (mm.c:141)
+==52715==    by 0x10A8FF: eval_mm_valid (mdriver.c:725)
+==52715==    by 0x10995B: main (mdriver.c:321)
+==52715==    by 0x48E84C3: __libc_start_call_main (libc_start_call_main.h:58)
+==52715==    by 0x48E8597: __libc_start_main@@GLIBC_2.34 (libc-start.c:360)
+==52715==    by 0x1091AF: _start (in /workspaces/malloc_lab_docker/malloc-lab/mdriver)
+==52715==  Uninitialised value was created by a heap allocation
+==52715==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==52715==    by 0x10C05B: mem_init (memlib.c:28)
+==52715==    by 0x1098C7: main (mdriver.c:312)
+==52715==    by 0x48E84C3: __libc_start_call_main (libc_start_call_main.h:58)
+==52715==    by 0x48E8597: __libc_start_main@@GLIBC_2.34 (libc-start.c:360)
+==52715==    by 0x1091AF: _start (in /workspaces/malloc_lab_docker/malloc-lab/mdriver)
+==52715== 
+==52715== Use of uninitialised value of size 8
+==52715==    at 0x10BF60: get_value (mm_utils.c:30)
+==52715==    by 0x10BF9B: is_allocated (mm_block.c:25)
+==52715==    by 0x10BDB7: coalesce (mm.c:215)
+==52715==    by 0x10BBA3: mm_free (mm.c:141)
+==52715==    by 0x10A8FF: eval_mm_valid (mdriver.c:725)
+==52715==    by 0x10995B: main (mdriver.c:321)
+==52715==    by 0x48E84C3: __libc_start_call_main (libc_start_call_main.h:58)
+==52715==    by 0x48E8597: __libc_start_main@@GLIBC_2.34 (libc-start.c:360)
+==52715==    by 0x1091AF: _start (in /workspaces/malloc_lab_docker/malloc-lab/mdriver)
+==52715==  Uninitialised value was created by a heap allocation
+==52715==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==52715==    by 0x10C05B: mem_init (memlib.c:28)
+==52715==    by 0x1098C7: main (mdriver.c:312)
+==52715==    by 0x48E84C3: __libc_start_call_main (libc_start_call_main.h:58)
+==52715==    by 0x48E8597: __libc_start_main@@GLIBC_2.34 (libc-start.c:360)
+==52715==    by 0x1091AF: _start (in /workspaces/malloc_lab_docker/malloc-lab/mdriver)
+==52715== 
+==52715== Use of uninitialised value of size 8
+==52715==    at 0x10BF60: get_value (mm_utils.c:30)
+==52715==    by 0x10BF7B: get_size (mm_block.c:15)
+==52715==    by 0x10BED3: coalesce (mm.c:238)
+==52715==    by 0x10BBA3: mm_free (mm.c:141)
+==52715==    by 0x10A8FF: eval_mm_valid (mdriver.c:725)
+==52715==    by 0x10995B: main (mdriver.c:321)
+==52715==    by 0x48E84C3: __libc_start_call_main (libc_start_call_main.h:58)
+==52715==    by 0x48E8597: __libc_start_main@@GLIBC_2.34 (libc-start.c:360)
+==52715==    by 0x1091AF: _start (in /workspaces/malloc_lab_docker/malloc-lab/mdriver)
+==52715==  Uninitialised value was created by a heap allocation
+==52715==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==52715==    by 0x10C05B: mem_init (memlib.c:28)
+==52715==    by 0x1098C7: main (mdriver.c:312)
+==52715==    by 0x48E84C3: __libc_start_call_main (libc_start_call_main.h:58)
+==52715==    by 0x48E8597: __libc_start_main@@GLIBC_2.34 (libc-start.c:360)
+==52715==    by 0x1091AF: _start (in /workspaces/malloc_lab_docker/malloc-lab/mdriver)
+==52715== 
+==52715== Use of uninitialised value of size 8
+==52715==    at 0x10BF08: coalesce (mm.c:239)
+==52715==    by 0x10BBA3: mm_free (mm.c:141)
+==52715==    by 0x10A8FF: eval_mm_valid (mdriver.c:725)
+==52715==    by 0x10995B: main (mdriver.c:321)
+==52715==    by 0x48E84C3: __libc_start_call_main (libc_start_call_main.h:58)
+==52715==    by 0x48E8597: __libc_start_main@@GLIBC_2.34 (libc-start.c:360)
+==52715==    by 0x1091AF: _start (in /workspaces/malloc_lab_docker/malloc-lab/mdriver)
+==52715==  Uninitialised value was created by a heap allocation
+==52715==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==52715==    by 0x10C05B: mem_init (memlib.c:28)
+==52715==    by 0x1098C7: main (mdriver.c:312)
+==52715==    by 0x48E84C3: __libc_start_call_main (libc_start_call_main.h:58)
+==52715==    by 0x48E8597: __libc_start_main@@GLIBC_2.34 (libc-start.c:360)
+==52715==    by 0x1091AF: _start (in /workspaces/malloc_lab_docker/malloc-lab/mdriver)
+==52715== 
+==52715== Use of uninitialised value of size 8
+==52715==    at 0x10BF60: get_value (mm_utils.c:30)
+==52715==    by 0x10BFD7: get_size (mm_block.c:15)
+==52715==    by 0x10BFD7: get_footer_pointer (mm_block.c:46)
+==52715==    by 0x10BF17: coalesce (mm.c:240)
+==52715==    by 0x10BBA3: mm_free (mm.c:141)
+==52715==    by 0x10A8FF: eval_mm_valid (mdriver.c:725)
+==52715==    by 0x10995B: main (mdriver.c:321)
+==52715==    by 0x48E84C3: __libc_start_call_main (libc_start_call_main.h:58)
+==52715==    by 0x48E8597: __libc_start_main@@GLIBC_2.34 (libc-start.c:360)
+==52715==    by 0x1091AF: _start (in /workspaces/malloc_lab_docker/malloc-lab/mdriver)
+==52715==  Uninitialised value was created by a heap allocation
+==52715==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==52715==    by 0x10C05B: mem_init (memlib.c:28)
+==52715==    by 0x1098C7: main (mdriver.c:312)
+==52715==    by 0x48E84C3: __libc_start_call_main (libc_start_call_main.h:58)
+==52715==    by 0x48E8597: __libc_start_main@@GLIBC_2.34 (libc-start.c:360)
+==52715==    by 0x1091AF: _start (in /workspaces/malloc_lab_docker/malloc-lab/mdriver)
+==52715== 
+==52715== Use of uninitialised value of size 8
+==52715==    at 0x10BF1C: coalesce (mm.c:240)
+==52715==    by 0x10BBA3: mm_free (mm.c:141)
+==52715==    by 0x10A8FF: eval_mm_valid (mdriver.c:725)
+==52715==    by 0x10995B: main (mdriver.c:321)
+==52715==    by 0x48E84C3: __libc_start_call_main (libc_start_call_main.h:58)
+==52715==    by 0x48E8597: __libc_start_main@@GLIBC_2.34 (libc-start.c:360)
+==52715==    by 0x1091AF: _start (in /workspaces/malloc_lab_docker/malloc-lab/mdriver)
+==52715==  Uninitialised value was created by a heap allocation
+==52715==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==52715==    by 0x10C05B: mem_init (memlib.c:28)
+==52715==    by 0x1098C7: main (mdriver.c:312)
+==52715==    by 0x48E84C3: __libc_start_call_main (libc_start_call_main.h:58)
+==52715==    by 0x48E8597: __libc_start_main@@GLIBC_2.34 (libc-start.c:360)
+==52715==    by 0x1091AF: _start (in /workspaces/malloc_lab_docker/malloc-lab/mdriver)
+==52715== 
+==52715== Invalid read of size 8
+==52715==    at 0x10BF60: get_value (mm_utils.c:30)
+==52715==    by 0x10BFD7: get_size (mm_block.c:15)
+==52715==    by 0x10BFD7: get_footer_pointer (mm_block.c:46)
+==52715==    by 0x10BF17: coalesce (mm.c:240)
+==52715==    by 0x10BBA3: mm_free (mm.c:141)
+==52715==    by 0x10A8FF: eval_mm_valid (mdriver.c:725)
+==52715==    by 0x10995B: main (mdriver.c:321)
+==52715==    by 0x48E84C3: __libc_start_call_main (libc_start_call_main.h:58)
+==52715==    by 0x48E8597: __libc_start_main@@GLIBC_2.34 (libc-start.c:360)
+==52715==    by 0x1091AF: _start (in /workspaces/malloc_lab_docker/malloc-lab/mdriver)
+==52715==  Address 0x303030307eb03f8 is not stack'd, malloc'd or (recently) free'd
+==52715== 
+==52715== 
+==52715== Process terminating with default action of signal 11 (SIGSEGV)
+==52715==  Access not within mapped region at address 0x3030307EB03F8
+==52715==    at 0x10BF60: get_value (mm_utils.c:30)
+==52715==    by 0x10BFD7: get_size (mm_block.c:15)
+==52715==    by 0x10BFD7: get_footer_pointer (mm_block.c:46)
+==52715==    by 0x10BF17: coalesce (mm.c:240)
+==52715==    by 0x10BBA3: mm_free (mm.c:141)
+==52715==    by 0x10A8FF: eval_mm_valid (mdriver.c:725)
+==52715==    by 0x10995B: main (mdriver.c:321)
+==52715==    by 0x48E84C3: __libc_start_call_main (libc_start_call_main.h:58)
+==52715==    by 0x48E8597: __libc_start_main@@GLIBC_2.34 (libc-start.c:360)
+==52715==    by 0x1091AF: _start (in /workspaces/malloc_lab_docker/malloc-lab/mdriver)
+==52715==  If you believe this happened as a result of a stack
+==52715==  overflow in your program's main thread (unlikely but
+==52715==  possible), you can try to increase the size of the
+==52715==  main thread stack using the --main-stacksize= flag.
+==52715==  The main thread stack size used in this run was 8388608.
+==52715== 
+==52715== HEAP SUMMARY:
+==52715==     in use at exit: 20,975,983 bytes in 10 blocks
+==52715==   total heap usage: 16 allocs, 6 frees, 20,980,647 bytes allocated
+==52715== 
+==52715== Searching for pointers to 10 not-freed blocks
+==52715== Checked 112,008 bytes
+==52715== 
+==52715== LEAK SUMMARY:
+==52715==    definitely lost: 0 bytes in 0 blocks
+==52715==    indirectly lost: 0 bytes in 0 blocks
+==52715==      possibly lost: 0 bytes in 0 blocks
+==52715==    still reachable: 20,975,983 bytes in 10 blocks
+==52715==         suppressed: 0 bytes in 0 blocks
+==52715== Rerun with --leak-check=full to see details of leaked memory
+==52715== 
+==52715== ERROR SUMMARY: 22 errors from 7 contexts (suppressed: 0 from 0)
+==52715== 
+==52715== 1 errors in context 1 of 7:
+==52715== Invalid read of size 8
+==52715==    at 0x10BF60: get_value (mm_utils.c:30)
+==52715==    by 0x10BFD7: get_size (mm_block.c:15)
+==52715==    by 0x10BFD7: get_footer_pointer (mm_block.c:46)
+==52715==    by 0x10BF17: coalesce (mm.c:240)
+==52715==    by 0x10BBA3: mm_free (mm.c:141)
+==52715==    by 0x10A8FF: eval_mm_valid (mdriver.c:725)
+==52715==    by 0x10995B: main (mdriver.c:321)
+==52715==    by 0x48E84C3: __libc_start_call_main (libc_start_call_main.h:58)
+==52715==    by 0x48E8597: __libc_start_main@@GLIBC_2.34 (libc-start.c:360)
+==52715==    by 0x1091AF: _start (in /workspaces/malloc_lab_docker/malloc-lab/mdriver)
+==52715==  Address 0x303030307eb03f8 is not stack'd, malloc'd or (recently) free'd
+==52715== 
+==52715== 
+==52715== 2 errors in context 2 of 7:
+==52715== Use of uninitialised value of size 8
+==52715==    at 0x10BF60: get_value (mm_utils.c:30)
+==52715==    by 0x10BFD7: get_size (mm_block.c:15)
+==52715==    by 0x10BFD7: get_footer_pointer (mm_block.c:46)
+==52715==    by 0x10BF17: coalesce (mm.c:240)
+==52715==    by 0x10BBA3: mm_free (mm.c:141)
+==52715==    by 0x10A8FF: eval_mm_valid (mdriver.c:725)
+==52715==    by 0x10995B: main (mdriver.c:321)
+==52715==    by 0x48E84C3: __libc_start_call_main (libc_start_call_main.h:58)
+==52715==    by 0x48E8597: __libc_start_main@@GLIBC_2.34 (libc-start.c:360)
+==52715==    by 0x1091AF: _start (in /workspaces/malloc_lab_docker/malloc-lab/mdriver)
+==52715==  Uninitialised value was created by a heap allocation
+==52715==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==52715==    by 0x10C05B: mem_init (memlib.c:28)
+==52715==    by 0x1098C7: main (mdriver.c:312)
+==52715==    by 0x48E84C3: __libc_start_call_main (libc_start_call_main.h:58)
+==52715==    by 0x48E8597: __libc_start_main@@GLIBC_2.34 (libc-start.c:360)
+==52715==    by 0x1091AF: _start (in /workspaces/malloc_lab_docker/malloc-lab/mdriver)
+==52715== 
+==52715== 
+==52715== 3 errors in context 3 of 7:
+==52715== Use of uninitialised value of size 8
+==52715==    at 0x10BF1C: coalesce (mm.c:240)
+==52715==    by 0x10BBA3: mm_free (mm.c:141)
+==52715==    by 0x10A8FF: eval_mm_valid (mdriver.c:725)
+==52715==    by 0x10995B: main (mdriver.c:321)
+==52715==    by 0x48E84C3: __libc_start_call_main (libc_start_call_main.h:58)
+==52715==    by 0x48E8597: __libc_start_main@@GLIBC_2.34 (libc-start.c:360)
+==52715==    by 0x1091AF: _start (in /workspaces/malloc_lab_docker/malloc-lab/mdriver)
+==52715==  Uninitialised value was created by a heap allocation
+==52715==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==52715==    by 0x10C05B: mem_init (memlib.c:28)
+==52715==    by 0x1098C7: main (mdriver.c:312)
+==52715==    by 0x48E84C3: __libc_start_call_main (libc_start_call_main.h:58)
+==52715==    by 0x48E8597: __libc_start_main@@GLIBC_2.34 (libc-start.c:360)
+==52715==    by 0x1091AF: _start (in /workspaces/malloc_lab_docker/malloc-lab/mdriver)
+==52715== 
+==52715== 
+==52715== 4 errors in context 4 of 7:
+==52715== Use of uninitialised value of size 8
+==52715==    at 0x10BF08: coalesce (mm.c:239)
+==52715==    by 0x10BBA3: mm_free (mm.c:141)
+==52715==    by 0x10A8FF: eval_mm_valid (mdriver.c:725)
+==52715==    by 0x10995B: main (mdriver.c:321)
+==52715==    by 0x48E84C3: __libc_start_call_main (libc_start_call_main.h:58)
+==52715==    by 0x48E8597: __libc_start_main@@GLIBC_2.34 (libc-start.c:360)
+==52715==    by 0x1091AF: _start (in /workspaces/malloc_lab_docker/malloc-lab/mdriver)
+==52715==  Uninitialised value was created by a heap allocation
+==52715==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==52715==    by 0x10C05B: mem_init (memlib.c:28)
+==52715==    by 0x1098C7: main (mdriver.c:312)
+==52715==    by 0x48E84C3: __libc_start_call_main (libc_start_call_main.h:58)
+==52715==    by 0x48E8597: __libc_start_main@@GLIBC_2.34 (libc-start.c:360)
+==52715==    by 0x1091AF: _start (in /workspaces/malloc_lab_docker/malloc-lab/mdriver)
+==52715== 
+==52715== 
+==52715== 4 errors in context 5 of 7:
+==52715== Use of uninitialised value of size 8
+==52715==    at 0x10BF60: get_value (mm_utils.c:30)
+==52715==    by 0x10BF7B: get_size (mm_block.c:15)
+==52715==    by 0x10BED3: coalesce (mm.c:238)
+==52715==    by 0x10BBA3: mm_free (mm.c:141)
+==52715==    by 0x10A8FF: eval_mm_valid (mdriver.c:725)
+==52715==    by 0x10995B: main (mdriver.c:321)
+==52715==    by 0x48E84C3: __libc_start_call_main (libc_start_call_main.h:58)
+==52715==    by 0x48E8597: __libc_start_main@@GLIBC_2.34 (libc-start.c:360)
+==52715==    by 0x1091AF: _start (in /workspaces/malloc_lab_docker/malloc-lab/mdriver)
+==52715==  Uninitialised value was created by a heap allocation
+==52715==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==52715==    by 0x10C05B: mem_init (memlib.c:28)
+==52715==    by 0x1098C7: main (mdriver.c:312)
+==52715==    by 0x48E84C3: __libc_start_call_main (libc_start_call_main.h:58)
+==52715==    by 0x48E8597: __libc_start_main@@GLIBC_2.34 (libc-start.c:360)
+==52715==    by 0x1091AF: _start (in /workspaces/malloc_lab_docker/malloc-lab/mdriver)
+==52715== 
+==52715== 
+==52715== 4 errors in context 6 of 7:
+==52715== Use of uninitialised value of size 8
+==52715==    at 0x10BF60: get_value (mm_utils.c:30)
+==52715==    by 0x10BF9B: is_allocated (mm_block.c:25)
+==52715==    by 0x10BDB7: coalesce (mm.c:215)
+==52715==    by 0x10BBA3: mm_free (mm.c:141)
+==52715==    by 0x10A8FF: eval_mm_valid (mdriver.c:725)
+==52715==    by 0x10995B: main (mdriver.c:321)
+==52715==    by 0x48E84C3: __libc_start_call_main (libc_start_call_main.h:58)
+==52715==    by 0x48E8597: __libc_start_main@@GLIBC_2.34 (libc-start.c:360)
+==52715==    by 0x1091AF: _start (in /workspaces/malloc_lab_docker/malloc-lab/mdriver)
+==52715==  Uninitialised value was created by a heap allocation
+==52715==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==52715==    by 0x10C05B: mem_init (memlib.c:28)
+==52715==    by 0x1098C7: main (mdriver.c:312)
+==52715==    by 0x48E84C3: __libc_start_call_main (libc_start_call_main.h:58)
+==52715==    by 0x48E8597: __libc_start_main@@GLIBC_2.34 (libc-start.c:360)
+==52715==    by 0x1091AF: _start (in /workspaces/malloc_lab_docker/malloc-lab/mdriver)
+==52715== 
+==52715== 
+==52715== 4 errors in context 7 of 7:
+==52715== Use of uninitialised value of size 8
+==52715==    at 0x10BF60: get_value (mm_utils.c:30)
+==52715==    by 0x10BFD7: get_size (mm_block.c:15)
+==52715==    by 0x10BFD7: get_footer_pointer (mm_block.c:46)
+==52715==    by 0x10BDB3: coalesce (mm.c:215)
+==52715==    by 0x10BBA3: mm_free (mm.c:141)
+==52715==    by 0x10A8FF: eval_mm_valid (mdriver.c:725)
+==52715==    by 0x10995B: main (mdriver.c:321)
+==52715==    by 0x48E84C3: __libc_start_call_main (libc_start_call_main.h:58)
+==52715==    by 0x48E8597: __libc_start_main@@GLIBC_2.34 (libc-start.c:360)
+==52715==    by 0x1091AF: _start (in /workspaces/malloc_lab_docker/malloc-lab/mdriver)
+==52715==  Uninitialised value was created by a heap allocation
+==52715==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==52715==    by 0x10C05B: mem_init (memlib.c:28)
+==52715==    by 0x1098C7: main (mdriver.c:312)
+==52715==    by 0x48E84C3: __libc_start_call_main (libc_start_call_main.h:58)
+==52715==    by 0x48E8597: __libc_start_main@@GLIBC_2.34 (libc-start.c:360)
+==52715==    by 0x1091AF: _start (in /workspaces/malloc_lab_docker/malloc-lab/mdriver)
+==52715== 
+==52715== ERROR SUMMARY: 22 errors from 7 contexts (suppressed: 0 from 0)
