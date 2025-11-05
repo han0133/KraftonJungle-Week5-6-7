@@ -37,7 +37,7 @@ int main(int argc, char **argv)
 
     // 5. 소켓 구조체를 호스트이름과 서비스이름으로 변환 > 클라이언트 정보 받아서 로그 출력
     Getnameinfo((SA *)&clientaddr, clientlen, hostname, MAXLINE, port, MAXLINE, 0);
-    printf("✅ Accepted connection from (%s, %s)\n", hostname, port);
+    printf("✅ line: %d, Accepted connection from (%s, %s)\n", __LINE__, hostname, port);
 
     // 6.
     doit(connfd);

@@ -1,5 +1,4 @@
 #include "csapp.h"
-#include <stdbool.h>
 
 /* 과제 조건: HTTP/1.0 GET 요청을 처리하는 기본 sequential proxy
 
@@ -11,19 +10,10 @@
   - 서버의 응답을 클라이언트에 전달
 */
 
-/* 프록시 캐시의 최대 크기 : 문제 조건이 100KiB */
+/* 프록시 캐시의 최대 크기 */
 #define MAX_CACHE_SIZE 1049000
-/* 캐시에 저장할 수 있는 개별 웹 오브젝트의 최대 크기 : 문제 조건이 1MiB*/
+/* 캐시에 저장할 수 있는 개별 웹 오브젝트의 최대 크기 */
 #define MAX_OBJECT_SIZE 102400
-#define FILE_NAME_SIZE 4096
-
-typedef struct
-{
-  char filename[FILE_NAME_SIZE]; // 보통 4096바이트
-  int size;
-  struct FileCached *next;
-} FileCache;
-FileCache *cache = NULL; // 해시 테이블 초기화
 
 /* 프록시가 웹 서버에 보낼 자신에 대한 정보 */
 static const char *user_agent_hdr =
@@ -36,7 +26,6 @@ void do_request(int clientfd, char *method, char *uri_ptos, char *host);
 void do_response(int connfd, int clientfd);
 int parse_uri(char *uri, char *uri_ptos, char *host, char *port);
 void *thread(void *vargp); // vargp: void argument pointer
-FileCache *find_file(const char *filename);
 
 /* 연결 및 병행성 관리 */
 int main(int argc, char **argv)
@@ -114,8 +103,7 @@ void do_it(int connfd)
 {
   // #region 변수 선언부
   int clientfd = 0;
-  int *is_cached = 0;
-  char buf[MAXLINE], host[MAXLINE], port[MAXLINE], method[MAXLINE], uri[MAXLINE], version[MAXLINE], uri_server_to_proxy[MAXLINE];
+  char buf[MAXLINE], host[MAXLINE], port[MAXLINE], method[MAXLINE], uri[MAXLINE], version[MAXLINE], uri_ptos[MAXLINE];
   rio_t rio;
   // #endregion
 
@@ -131,18 +119,13 @@ void do_it(int connfd)
   printf("%d 🐛 [do_it] buf: %s\n", __LINE__, buf);
 
   /* buf에서 문자열을 읽어와서 각 변수에 저장 */
+  // 🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨 디버깅 중
   sscanf(buf, "%s %s %s", method, uri, version);
   printf("%d 🐛 [do_it] method: %s, uri: %s, version: %s\n", __LINE__, method, uri, version);
 
-  int result = parse_uri(uri, uri_server_to_proxy, host, port); // 음수: 에러, 0: not cached, 1: cached
+  int result = parse_uri(uri, uri_ptos, host, port);
   printf("%d 🐛 [do_it] parse_uri result: %d\n", __LINE__, result);
-  printf("%d 🐛 [do_it] host: %s, uri_ptos: %s, port: %s\n", __LINE__, host, uri_server_to_proxy, port);
-
-  /*================== 👷 1. 캐시 여부 확인 ==================*/
-  if (result == 1)
-  {
-    send_cached_response(clientfd, uri_server_to_proxy);
-  }
+  printf("%d 🐛 [do_it] host: %s, uri_ptos: %s, port: %s\n", __LINE__, host, uri_ptos, port);
 
   // http://localhost:5000/
   /* server의 리스닝 소켓 연결 */
@@ -150,42 +133,13 @@ void do_it(int connfd)
   printf("%d 🐛 [do_it] Open_clientfd() clientfd: %d\n", __LINE__, clientfd);
 
   /*===========👷 2. 클라이언트의 요청 읽고 서버에 전달 =========*/
-  do_request(clientfd, method, uri_server_to_proxy, host);
+  do_request(clientfd, method, uri_ptos, host);
 
   /*===========👷 3. 서버의 응답을 클라이언트에 전달 =========*/
   do_response(connfd, clientfd);
 
   /* 리스닝 소켓 연결 종료 */
   Close(clientfd);
-}
-
-void send_cached_response(int connfd, char *filepath)
-{
-  char buf[MAX_CACHE_SIZE];
-  ssize_t n;
-
-  /*============= 👷 1. 캐시 파일 열기 =============*/
-  FileCache *pFile = fopen(filepath, "rb");
-  if (pFile == NULL)
-  {
-    printf("%d ❌ [send_cached_response] 파일 열기 실패: %s\n", __LINE__, filepath);
-    return;
-  }
-
-  /*============= 👷 2. 파일에서 데이터 읽기 =============*/
-  n = fread(buf, 1, MAX_CACHE_SIZE, pFile);
-  if (n < 0)
-  {
-    printf("%d ❌ [send_cached_response] 파일 읽기 실패\n", __LINE__);
-    fclose(pFile);
-    return;
-  }
-
-  /*============= 👷 3. 응답을 클라이언트로 보내줌 =============*/
-  Rio_writen(connfd, buf, n);
-  printf("%d 🐛 [send_cached_response] 클라이언트에 응답 전송 완료\n", __LINE__);
-
-  fclose(pFile);
 }
 
 /* proxy => server */
@@ -195,7 +149,7 @@ void do_request(int clientfd, char *method, char *uri_ptos, char *host)
   printf("%d 🐛 [do_request] clientfd: %d\n", __LINE__, clientfd);
   printf("%d 🐛 [do_request] method: %s, uri_ptos: %s, host: %s\n", __LINE__, method, uri_ptos, host);
 
-  /*================== 👷 1. 요청 헤더 읽고 요청 구조화 ==================*/
+  /*================== 👷 1. 요청 헤더 읽고 요청 구조화==================*/
   int offset = 0;
   // GET /index.html HTTP/1.0
   offset += snprintf(buf + offset, MAXLINE - offset, "GET %s %s\r\n", uri_ptos, new_version);
@@ -234,55 +188,37 @@ void do_response(int connfd, int clientfd)
   Rio_writen(connfd, buf, n);
 }
 
-int parse_uri(char *uri, char *uri_proxy_to_server, char *host, char *port)
+int parse_uri(char *uri, char *uri_ptos, char *host, char *port)
 {
   char *ptr = NULL;
 
-  printf("%d 🐛 [parse_uri] uri: %s\n", __LINE__, uri); // 예) http://localhost:12425/nop-file.txt
+  printf("%d 🐛 [parse_uri] uri: %s\n", __LINE__, uri); // 예) http://localhost:5724/home.html
 
   /*============= 👷 1. URI에서 필요한 데이터 추출 =============*/
   // 필요한 데이터 : host, User-Agent, Connection: close, Proxy-Connection: close
-  // printf("%d🐛 parse_uri(): %s, %s, %s, %s\n", __LINE__, uri, uri_proxy_to_server, host, port);
+  // uri: "/?id=60c04392-4eed-460a-a28e-5f9ffd85c039&vscodeBrowserReqId=1762327057338"
+  // printf("%d🐛 parse_uri(): %s, %s, %s, %s\n", __LINE__, uri, uri_ptos, host, port);
 
   /* http:// 잘라서 host 추출 */
   if (!(ptr = strstr(uri, "://")))
     return -1; // ://가 없으면 invalid uri
   ptr += 3;
-  strcpy(host, ptr); // host = localhost:12425/nop-file.txt
+  strcpy(host, ptr); // host = localhost:5724/home.html
   printf("%d 🐛 [parse_uri] host: %s\n", __LINE__, host);
 
-  /* uri_ptos(proxy => server로 보낼 uri 추출 */
+  /* uri_ptos(proxy => server로 보낼 uri) 추출 */
   if ((ptr = strstr(host, "/")))
   {
     *ptr = '\0'; // host = localhost:5724
     ptr += 1;
-    strcpy(uri_proxy_to_server, "/"); // uri_proxy_to_server = /
-    strcat(uri_proxy_to_server, ptr); // uri_proxy_to_server = /nop-file.txt
+    strcpy(uri_ptos, "/"); // uri_ptos = /
+    strcat(uri_ptos, ptr); // uri_ptos = /home.html
   }
   else
   {
-    strcpy(uri_proxy_to_server, "/");
+    strcpy(uri_ptos, "/");
   }
-  printf("%d 🐛 [parse_uri] uri_ptos: %s\n", __LINE__, uri_proxy_to_server);
-
-  // TODO: 캐시 구현
-  //  1. 캐시에 있는지 확인 O
-  //  2. 있으면 캐시 디렉토리 하위 파일로 uri_proxy_to_server 변경
-  //  3. 없으면 그대로 진행하고, 캐시에 저장
-
-  /* 캐시에 있는지 확인 */
-  FileCache *result = find_file(uri_proxy_to_server);
-  if (result != NULL)
-  {
-    // 캐시히트 : 캐시 디렉토리 하위 파일로 uri_proxy_to_server 변경
-    sprintf(uri_proxy_to_server, "/cached%s", uri_proxy_to_server);
-    printf("%d 🐛 [parse_uri] cached hit. uri: %s\n", __LINE__, uri_proxy_to_server);
-    return 1;
-  }
-  else
-  {
-    // 캐시 미스
-  }
+  printf("%d 🐛 [parse_uri] uri_ptos: %s\n", __LINE__, uri_ptos);
 
   /* port 추출 */
   if ((ptr = strstr(host, ":")))
@@ -310,12 +246,4 @@ int parse_uri(char *uri, char *uri_proxy_to_server, char *host, char *port)
   */
 
   return 0; // return for valid check
-}
-
-/* filename으로 키로 해시테이블 cache에서 일치하는 구조체 찾기 */
-FileCache *find_file(const char *filename)
-{
-  FileCache *cached_file = NULL;
-  HASH_FIND_STR(cache, filename, cached_file);
-  return cached_file;
 }

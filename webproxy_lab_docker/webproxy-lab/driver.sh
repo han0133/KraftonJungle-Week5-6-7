@@ -289,7 +289,9 @@ wait_for_port_use "${tiny_port}"
 # Run the proxy
 proxy_port=$(free_port)
 echo "Starting proxy on port ${proxy_port}"
-./proxy ${proxy_port} &> /dev/null &
+# ./proxy ${proxy_port} &> /dev/null &
+./proxy ${proxy_port} &
+proxy_pid=$!
 proxy_pid=$!
 
 # Wait for the proxy to start in earnest
@@ -319,6 +321,7 @@ download_proxy $PROXY_DIR ${FETCH_FILE} "http://localhost:${tiny_port}/${FETCH_F
 
 # See if the proxy fetch succeeded
 echo "Checking whether the proxy fetch succeeded"
+diff -q ${PROXY_DIR}/${FETCH_FILE} ${NOPROXY_DIR}/${FETCH_FILE} &
 diff -q ${PROXY_DIR}/${FETCH_FILE} ${NOPROXY_DIR}/${FETCH_FILE} &> /dev/null
 if [ $? -eq 0 ]; then
     concurrencyScore=${MAX_CONCURRENCY}
