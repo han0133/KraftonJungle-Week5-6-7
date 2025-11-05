@@ -1,29 +1,8 @@
 #include "csapp.h"
-#include <stdbool.h>
+#include "cache.h"
+#include <stdio.h>
 
-/* 과제 조건: HTTP/1.0 GET 요청을 처리하는 기본 sequential proxy
-
-  클라이언트의 요청 (to proxy)
-  → proxy
-  - URI 파싱
-  - 웹서버에 대신 요청을 전달
-  - 웹 서버와 연결
-  - 서버의 응답을 클라이언트에 전달
-*/
-
-/* 프록시 캐시의 최대 크기 : 문제 조건이 100KiB */
-#define MAX_CACHE_SIZE 1049000
-/* 캐시에 저장할 수 있는 개별 웹 오브젝트의 최대 크기 : 문제 조건이 1MiB*/
-#define MAX_OBJECT_SIZE 102400
 #define FILE_NAME_SIZE 4096
-
-typedef struct
-{
-  char filename[FILE_NAME_SIZE]; // 보통 4096바이트
-  int size;
-  struct FileCached *next;
-} FileCache;
-FileCache *cache = NULL; // 해시 테이블 초기화
 
 /* 프록시가 웹 서버에 보낼 자신에 대한 정보 */
 static const char *user_agent_hdr =
@@ -33,10 +12,9 @@ static const char *new_version = "HTTP/1.0";
 
 void do_it(int fd);
 void do_request(int clientfd, char *method, char *uri_ptos, char *host);
-void do_response(int connfd, int clientfd);
+void do_response(int connfd, int clientfd, char *host, char *uri);
 int parse_uri(char *uri, char *uri_ptos, char *host, char *port);
-void *thread(void *vargp); // vargp: void argument pointer
-FileCache *find_file(const char *filename);
+void *thread(void *vargp); // vargp: void argument pointer3
 
 /* 연결 및 병행성 관리 */
 int main(int argc, char **argv)
@@ -63,6 +41,8 @@ int main(int argc, char **argv)
     exit(1);
   }
   // #endregion
+
+  cache_init();
 
   /*================== 👷 1. 리스닝 소켓 만들기 ==================*/
   /* 포트번호에 해당하는 리스닝 소켓 식별자를 열어준다 */
@@ -114,7 +94,6 @@ void do_it(int connfd)
 {
   // #region 변수 선언부
   int clientfd = 0;
-  int *is_cached = 0;
   char buf[MAXLINE], host[MAXLINE], port[MAXLINE], method[MAXLINE], uri[MAXLINE], version[MAXLINE], uri_server_to_proxy[MAXLINE];
   rio_t rio;
   // #endregion
@@ -134,17 +113,9 @@ void do_it(int connfd)
   sscanf(buf, "%s %s %s", method, uri, version);
   printf("%d 🐛 [do_it] method: %s, uri: %s, version: %s\n", __LINE__, method, uri, version);
 
-  int result = parse_uri(uri, uri_server_to_proxy, host, port); // 음수: 에러, 0: not cached, 1: cached
-  printf("%d 🐛 [do_it] parse_uri result: %d\n", __LINE__, result);
+  int result = parse_uri(uri, uri_server_to_proxy, host, port);
   printf("%d 🐛 [do_it] host: %s, uri_ptos: %s, port: %s\n", __LINE__, host, uri_server_to_proxy, port);
 
-  /*================== 👷 1. 캐시 여부 확인 ==================*/
-  if (result == 1)
-  {
-    send_cached_response(clientfd, uri_server_to_proxy);
-  }
-
-  // http://localhost:5000/
   /* server의 리스닝 소켓 연결 */
   clientfd = Open_clientfd(host, port);
   printf("%d 🐛 [do_it] Open_clientfd() clientfd: %d\n", __LINE__, clientfd);
@@ -152,8 +123,16 @@ void do_it(int connfd)
   /*===========👷 2. 클라이언트의 요청 읽고 서버에 전달 =========*/
   do_request(clientfd, method, uri_server_to_proxy, host);
 
-  /*===========👷 3. 서버의 응답을 클라이언트에 전달 =========*/
-  do_response(connfd, clientfd);
+  /*===========👷 3. 서버의 응답을 클라이언트에 전달 (캐시 여부 확인) =========*/
+  int is_cached = isInCache(host, uri_server_to_proxy);
+  if (is_cached)
+  {
+    send_cached_response(clientfd, uri_server_to_proxy);
+  }
+  else
+  {
+    do_response(connfd, clientfd, host, uri_server_to_proxy);
+  }
 
   /* 리스닝 소켓 연결 종료 */
   Close(clientfd);
@@ -165,7 +144,7 @@ void send_cached_response(int connfd, char *filepath)
   ssize_t n;
 
   /*============= 👷 1. 캐시 파일 열기 =============*/
-  FileCache *pFile = fopen(filepath, "rb");
+  FILE *pFile = fopen(filepath, "rb");
   if (pFile == NULL)
   {
     printf("%d ❌ [send_cached_response] 파일 열기 실패: %s\n", __LINE__, filepath);
@@ -215,9 +194,9 @@ void do_request(int clientfd, char *method, char *uri_ptos, char *host)
 }
 
 /* server => proxy */
-void do_response(int connfd, int clientfd)
+void do_response(int connfd, int clientfd, char *host, char *uri)
 {
-  char buf[MAX_CACHE_SIZE];
+  char buf[MAXBUF];
   ssize_t n;
   rio_t rio;
 
@@ -225,13 +204,55 @@ void do_response(int connfd, int clientfd)
 
   /*============= 👷 1. 서버로부터 온 응답 읽기 =============*/
   Rio_readinitb(&rio, clientfd);
-  n = Rio_readnb(&rio, buf, MAX_CACHE_SIZE);
+  n = Rio_readnb(&rio, buf, MAXBUF);
 
   printf("%d 🐛 [do_response] read bytes: %zd\n", __LINE__, n);
+  // 🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨
+  // TODO: header+body를 다 가져와서 전체 메시지 크기를 계산하는 함수 구현
+  // TODO: write_file에 넣어주기
+  // 🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨
+
   // printf("%d 🐛 [do_response] 🔽 buf 🔽 \n%s\n", __LINE__, buf);
+
+  /*============= 👷 2. 서버로부터 온 응답 읽기 =============*/
+  int can_cache = canAddToCache(host, uri, n);
+  switch (can_cache)
+  {
+  case CACHE_OK:
+    add_cache_entry(host, uri, n);
+    break;
+
+    // default:
+    //   break;
+  }
 
   /*============= 👷 2. 응답을 클라이언트로 보내줌 =============*/
   Rio_writen(connfd, buf, n);
+}
+
+void write_file(char *filepath, char *buf, int buf_size)
+{
+  /* 파일 쓰기 모드로 열기 */
+  FILE *pFile = fopen(filepath, "wb");
+  if (pFile == NULL)
+  {
+    printf("%d ❌ [write_file] 파일 열기 실패: %s\n", __LINE__, filepath);
+    return;
+  }
+
+  /* buf 데이터를 파일에 쓰기 */
+  size_t written = fwrite(buf, 1, buf_size, pFile);
+
+  if (written != buf_size)
+  {
+    printf("쓰기 실패: %zu/%d 바이트만 썼습니다\n", written, buf_size);
+  }
+  else
+  {
+    printf("파일에 %d 바이트를 성공적으로 썼습니다\n", buf_size);
+  }
+
+  fclose(pFile); // 파일 닫기
 }
 
 int parse_uri(char *uri, char *uri_proxy_to_server, char *host, char *port)
@@ -265,25 +286,6 @@ int parse_uri(char *uri, char *uri_proxy_to_server, char *host, char *port)
   }
   printf("%d 🐛 [parse_uri] uri_ptos: %s\n", __LINE__, uri_proxy_to_server);
 
-  // TODO: 캐시 구현
-  //  1. 캐시에 있는지 확인 O
-  //  2. 있으면 캐시 디렉토리 하위 파일로 uri_proxy_to_server 변경
-  //  3. 없으면 그대로 진행하고, 캐시에 저장
-
-  /* 캐시에 있는지 확인 */
-  FileCache *result = find_file(uri_proxy_to_server);
-  if (result != NULL)
-  {
-    // 캐시히트 : 캐시 디렉토리 하위 파일로 uri_proxy_to_server 변경
-    sprintf(uri_proxy_to_server, "/cached%s", uri_proxy_to_server);
-    printf("%d 🐛 [parse_uri] cached hit. uri: %s\n", __LINE__, uri_proxy_to_server);
-    return 1;
-  }
-  else
-  {
-    // 캐시 미스
-  }
-
   /* port 추출 */
   if ((ptr = strstr(host, ":")))
   {              // host = localhost:5724
@@ -310,12 +312,4 @@ int parse_uri(char *uri, char *uri_proxy_to_server, char *host, char *port)
   */
 
   return 0; // return for valid check
-}
-
-/* filename으로 키로 해시테이블 cache에서 일치하는 구조체 찾기 */
-FileCache *find_file(const char *filename)
-{
-  FileCache *cached_file = NULL;
-  HASH_FIND_STR(cache, filename, cached_file);
-  return cached_file;
 }

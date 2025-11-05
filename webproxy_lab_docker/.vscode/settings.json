@@ -1,5 +1,8 @@
 {
   "files.associations": {
-    "csapp.h": "c"
-  }
+    "csapp.h": "c",
+    "cache.h": "c"
+  },"todohighlight.keywords": [
+  "HACK", "NOTE", "BUG", "INFO", "OPTIMIZE", "REVIEW"
+]
 }

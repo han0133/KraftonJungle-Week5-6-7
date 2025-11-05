@@ -321,7 +321,6 @@ download_proxy $PROXY_DIR ${FETCH_FILE} "http://localhost:${tiny_port}/${FETCH_F
 
 # See if the proxy fetch succeeded
 echo "Checking whether the proxy fetch succeeded"
-diff -q ${PROXY_DIR}/${FETCH_FILE} ${NOPROXY_DIR}/${FETCH_FILE} &
 diff -q ${PROXY_DIR}/${FETCH_FILE} ${NOPROXY_DIR}/${FETCH_FILE} &> /dev/null
 if [ $? -eq 0 ]; then
     concurrencyScore=${MAX_CONCURRENCY}
