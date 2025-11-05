@@ -55,6 +55,7 @@ int main(int argc, char **argv)
   /*================== 👷 1. 리스닝 소켓 만들기 ==================*/
   /* 포트번호에 해당하는 리스닝 소켓 식별자를 열어준다 */
   listenfd = Open_listenfd(argv[1]);
+  printf("✅ Proxy Started.\n");
 
   /* 클라이언트의 요청이 올 때마다 새로운 커넥션 소켓을 만들고 doit() 호출 */
   while (1)
@@ -113,9 +114,13 @@ void do_it(int connfd)
   /* buf에서 문자열을 읽어와서 각 변수에 저장 */
   // 🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨 디버깅 중
   sscanf(buf, "%s %s %s", method, uri, version);
+
+  printf("🐛 parse ab: %s, %s, %s", method, uri, version);
+
   int result = parse_uri(uri, uri_ptos, host, port);
   printf("🐛 parse result: %d", result);
 
+  // http://localhost:5000/
   /* server의 리스닝 소켓 연결 */
   clientfd = Open_clientfd(host, port);
   printf("🐛 Open_clientfd() clientfd: %d\n", clientfd);
@@ -175,6 +180,8 @@ int parse_uri(char *uri, char *uri_ptos, char *host, char *port)
 
   /*============= 👷 1. URI에서 필요한 데이터 추출 =============*/
   printf("👷 1. URI에서 필요한 데이터 추출\n");
+  // TODO: 필요한 데이터 뭔지 리스트업
+
   /* http:// 잘라서 host 추출 */
   if (!(ptr = strstr(uri, "://")))
     return -1; // ://가 없으면 invalid uri
