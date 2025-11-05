@@ -12,10 +12,10 @@ int append_body(char *buf, int offset, int max_size, char *format, ...);
 int main(int argc, char **argv)
 {
   // 1. 변수 선언
-  int listendfd, connfd;
+  int listendfd = 0, connfd = 0;
   char hostname[MAXLINE], port[MAXLINE];
   socklen_t clientlen; // 기본적으로 최소 32비트 이상의 부호없는 정수. OS별로 다른 정수 크기를 지원함. POSIX 표준임. 각 시스템이 자신에 맞게 정의 할 수 있음 (32bit, 64bit, unsigned int...)
-  struct sockaddr_storage clientaddr;
+  struct sockaddr_storage clientaddr = {};
 
   // 2. argc 검사
   if (argc != 2)
@@ -49,10 +49,9 @@ int main(int argc, char **argv)
 
 void doit(int fd)
 {
-  int is_static;
-  struct stat sbuf; // 파일의 메타정보 (크기, 타입, 권한, 시간 등)를 가진 구조체
-  char buf[MAXLINE], method[MAXLINE], uri[MAXLINE], version[MAXLINE];
-  char filename[MAXLINE], cgiargs[MAXLINE];
+  int is_static = 0;
+  struct stat sbuf = {}; // 파일의 메타정보 (크기, 타입, 권한, 시간 등)를 가진 구조체
+  char buf[MAXLINE], method[MAXLINE], uri[MAXLINE], version[MAXLINE], filename[MAXLINE], cgiargs[MAXLINE];
   rio_t rio; // buffered I/O 용도 (파일디스크립터, 버퍼에 남은 읽을 바이트, 다음 읽을 위치 포인터, 내부 버퍼)
 
   // 1. fd연결 및 내부 퍼버 초기화
@@ -205,7 +204,7 @@ int parse_uri(char *uri, char *filename, char *cgiargs)
     }
     else
     {
-      strcpy(cgiargs, ""); // cgiargs = ""
+      strcpy(cgiargs, ""); // cgiargs
     }
 
     strcpy(filename, ".");
@@ -217,7 +216,7 @@ int parse_uri(char *uri, char *filename, char *cgiargs)
 
 void serve_static(int fd, char *filename, int filesize, char *method)
 {
-  int srcfd; // 파일을 읽기 위한 디스크립터
+  int srcfd = 0; // 파일을 읽기 위한 디스크립터
   char filetype[MAXLINE], buf[MAXBUF];
   int offset = 0;
 

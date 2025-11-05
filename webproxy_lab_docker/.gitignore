@@ -4,6 +4,9 @@
 .LSOverride
 ._*
 
+# codviz
+.codeviz/
+
 # Prerequisites
 *.d
 

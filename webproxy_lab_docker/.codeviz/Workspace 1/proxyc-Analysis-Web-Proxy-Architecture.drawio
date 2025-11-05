@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        <mxfile host="codeviz.app" modified="2025-11-05T04:39:06.596Z" agent="CodeViz Exporter" version="14.6.5" type="device">
+          <diagram id="codeviz-diagram" name="System Diagram">
+            <mxGraphModel dx="1000" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+              <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="f463d6d4-RequestProcessing" value="" style="html=1;whiteSpace=wrap;container=1;fillColor=#dae8fc;strokeColor=#6c8ebf;dashed=1;fillOpacity=20;strokeWidth=2;containerType=none;recursiveResize=0;movable=1;resizable=1;autosize=0;dropTarget=0" vertex="1" parent="f463d6d4-CHT1">
+                  <mxGeometry x="384.23333333333335" y="-150" width="380" height="334" as="geometry"/>
+                </mxCell>
+                <mxCell id="f463d6d4-RequestProcessing_label" value="**Request Processing**
+Client-Proxy" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;labelBackgroundColor=white;spacing=5" vertex="1" parent="f463d6d4-CHT1">
+                  <mxGeometry x="392.23333333333335" y="-142" width="304" height="24" as="geometry"/>
+                </mxCell>
+<mxCell id="f463d6d4-ResponseRelaying" value="" style="html=1;whiteSpace=wrap;container=1;fillColor=#dae8fc;strokeColor=#6c8ebf;dashed=1;fillOpacity=20;strokeWidth=2;containerType=none;recursiveResize=0;movable=1;resizable=1;autosize=0;dropTarget=0" vertex="1" parent="f463d6d4-CHT1">
+                  <mxGeometry x="115.3" y="603" width="298" height="229" as="geometry"/>
+                </mxCell>
+                <mxCell id="f463d6d4-ResponseRelaying_label" value="**Response Relaying**
+Proxy-Client" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;labelBackgroundColor=white;spacing=5" vertex="1" parent="f463d6d4-CHT1">
+                  <mxGeometry x="123.3" y="611" width="222" height="24" as="geometry"/>
+                </mxCell>
+<mxCell id="f463d6d4-ServerInteraction" value="" style="html=1;whiteSpace=wrap;container=1;fillColor=#dae8fc;strokeColor=#6c8ebf;dashed=1;fillOpacity=20;strokeWidth=2;containerType=none;recursiveResize=0;movable=1;resizable=1;autosize=0;dropTarget=0" vertex="1" parent="f463d6d4-CHT1">
+                  <mxGeometry x="172.55" y="174" width="492" height="439" as="geometry"/>
+                </mxCell>
+                <mxCell id="f463d6d4-ServerInteraction_label" value="**Server Interaction**
+Proxy-Web Server" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;labelBackgroundColor=white;spacing=5" vertex="1" parent="f463d6d4-CHT1">
+                  <mxGeometry x="180.55" y="182" width="416" height="24" as="geometry"/>
+                </mxCell>
+<mxCell id="f463d6d4-CHT1" value="" style="html=1;whiteSpace=wrap;container=1;fillColor=#dae8fc;strokeColor=#6c8ebf;dashed=1;fillOpacity=20;strokeWidth=2;containerType=none;recursiveResize=0;movable=1;resizable=1;autosize=0;dropTarget=0" vertex="1" parent="f463d6d4-ProxyMainProcess">
+                  <mxGeometry x="959.4458333333334" y="322" width="795" height="1281" as="geometry"/>
+                </mxCell>
+                <mxCell id="f463d6d4-CHT1_label" value="**Client Handling Thread (per connection)**
+Manages a single client-server transaction" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;labelBackgroundColor=white;spacing=5" vertex="1" parent="f463d6d4-ProxyMainProcess">
+                  <mxGeometry x="967.4458333333334" y="330" width="719" height="24" as="geometry"/>
+                </mxCell>
+<mxCell id="f463d6d4-DataStructures" value="" style="html=1;whiteSpace=wrap;container=1;fillColor=#dae8fc;strokeColor=#6c8ebf;dashed=1;fillOpacity=20;strokeWidth=2;containerType=none;recursiveResize=0;movable=1;resizable=1;autosize=0;dropTarget=0" vertex="1" parent="f463d6d4-group">
+                  <mxGeometry x="1365.5541666666666" y="1832" width="742" height="269" as="geometry"/>
+                </mxCell>
+                <mxCell id="f463d6d4-DataStructures_label" value="**Key Data Structures**
+Used throughout proxy.c" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;labelBackgroundColor=white;spacing=5" vertex="1" parent="f463d6d4-group">
+                  <mxGeometry x="1373.5541666666666" y="1840" width="666" height="24" as="geometry"/>
+                </mxCell>
+<mxCell id="f463d6d4-ExternalEntities" value="" style="html=1;whiteSpace=wrap;container=1;fillColor=#dae8fc;strokeColor=#6c8ebf;dashed=1;fillOpacity=20;strokeWidth=2;containerType=none;recursiveResize=0;movable=1;resizable=1;autosize=0;dropTarget=0" vertex="1" parent="f463d6d4-group">
+                  <mxGeometry x="899" y="1849.5" width="481" height="229" as="geometry"/>
+                </mxCell>
+                <mxCell id="f463d6d4-ExternalEntities_label" value="**External Entities**
+[External]" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;labelBackgroundColor=white;spacing=5" vertex="1" parent="f463d6d4-group">
+                  <mxGeometry x="907" y="1857.5" width="405" height="24" as="geometry"/>
+                </mxCell>
+<mxCell id="f463d6d4-ProxyMainProcess" value="" style="html=1;whiteSpace=wrap;container=1;fillColor=#dae8fc;strokeColor=#6c8ebf;dashed=1;fillOpacity=20;strokeWidth=2;containerType=none;recursiveResize=0;movable=1;resizable=1;autosize=0;dropTarget=0" vertex="1" parent="f463d6d4-group">
+                  <mxGeometry x="959.4458333333334" y="62" width="1148" height="1710" as="geometry"/>
+                </mxCell>
+                <mxCell id="f463d6d4-ProxyMainProcess_label" value="**Proxy Server Main Process**
+proxy.c" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;labelBackgroundColor=white;spacing=5" vertex="1" parent="f463d6d4-group">
+                  <mxGeometry x="967.4458333333334" y="70" width="1072" height="24" as="geometry"/>
+                </mxCell>
+<mxCell id="f463d6d4-UtilityFunctions" value="" style="html=1;whiteSpace=wrap;container=1;fillColor=#dae8fc;strokeColor=#6c8ebf;dashed=1;fillOpacity=20;strokeWidth=2;containerType=none;recursiveResize=0;movable=1;resizable=1;autosize=0;dropTarget=0" vertex="1" parent="f463d6d4-group">
+                  <mxGeometry x="53" y="1849.5" width="886" height="229" as="geometry"/>
+                </mxCell>
+                <mxCell id="f463d6d4-UtilityFunctions_label" value="**Utility Functions**
+proxy.c" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;labelBackgroundColor=white;spacing=5" vertex="1" parent="f463d6d4-group">
+                  <mxGeometry x="61" y="1857.5" width="810" height="24" as="geometry"/>
+                </mxCell>
+<mxCell id="f463d6d4-group" value="" style="html=1;whiteSpace=wrap;container=1;fillColor=#dae8fc;strokeColor=#6c8ebf;dashed=1;fillOpacity=20;strokeWidth=2;containerType=none;recursiveResize=0;movable=1;resizable=1;autosize=0;dropTarget=0" vertex="1" parent="f463d6d4-wrapper">
+                  <mxGeometry x="345" y="20" width="2119" height="2151" as="geometry"/>
+                </mxCell>
+                <mxCell id="f463d6d4-group_label" value="**Diagram**" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;labelBackgroundColor=white;spacing=5" vertex="1" parent="f463d6d4-wrapper">
+                  <mxGeometry x="353" y="28" width="2043" height="24" as="geometry"/>
+                </mxCell>
+<mxCell id="f463d6d4-wrapper" value="" style="html=1;whiteSpace=wrap;container=1;fillColor=#dae8fc;strokeColor=#6c8ebf;dashed=1;fillOpacity=20;strokeWidth=2;containerType=none;recursiveResize=0;movable=1;resizable=1;autosize=0;dropTarget=0" vertex="1" parent="1">
+                  <mxGeometry x="325" y="0" width="4811" height="2191" as="geometry"/>
+                </mxCell>
+                <mxCell id="f463d6d4-wrapper_label" value="`proxy.c` Analysis: Web Proxy Architecture
+proxy.c" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;labelBackgroundColor=white;spacing=5" vertex="1" parent="1">
+                  <mxGeometry x="333" y="8" width="4735" height="24" as="geometry"/>
+                </mxCell>
+                <mxCell id="f463d6d4-report" value="# `proxy.c` Analysis: Web Proxy Architecture
+
+## Overview
+
+`proxy.c` implements a basic, sequential web proxy designed to act as an intermediary between a client and a web server. Its primary function is to handle HTTP/1.0 GET requests, forwarding them to the appropriate web server and relaying the server&apos;s responses back to the client. The proxy is capable of handling multiple client connections concurrently by spawning a new thread for each incoming request.
+
+## Main Functionalities
+
+1.  **Client Connection Management**: The proxy listens for incoming TCP connections from clients. Upon receiving a connection, it accepts it and spawns a new thread to handle the client&apos;s request independently, allowing for concurrent processing of multiple clients.
+2.  **Request Parsing**: It reads the client&apos;s HTTP request, meticulously parsing the request line to extract the HTTP method (specifically &apos;GET&apos;), the full URI, and the HTTP version. Further, it breaks down the URI into its constituent parts: the target host, the port number, and the specific path to be requested from the web server.
+3.  **Request Forwarding**: After parsing, the proxy establishes a new TCP connection to the identified target web server. It then constructs a new HTTP/1.0 GET request, ensuring it includes essential headers such as `Host`, `User-Agent`, `Connection` (set to `close`), and `Proxy-Connection` (also set to `close`), before sending this reformulated request to the web server.
+4.  **Response Relaying**: Once the web server processes the forwarded request and sends its HTTP response, the proxy reads the entire response. It then relays this complete response, including headers and body, back to the original client without modification.
+
+## Key Functions
+
+-   **`main(int argc, char **argv)`**: This is the program&apos;s entry point. It initializes the listening socket, binds it to a specified port, and enters an infinite loop to accept incoming client connections. For each accepted connection, it creates a new thread, passing the client&apos;s connection file descriptor to it.
+-   **`void *thread(void *vargp)`**: Executed by each newly spawned thread. It detaches itself from the main thread, calls `do_it` to handle the specific client request, and then closes the client connection file descriptor, releasing resources.
+-   **`void do_it(int connfd)`**: Contains the core logic for processing a single client-proxy-server transaction. It reads the client&apos;s request, parses its URI, establishes a connection to the web server, forwards the request, receives the server&apos;s response, and relays it back to the client.
+-   **`void do_request(int clientfd, char *method, char *uri_ptos, char *host)`**: Responsible for constructing the HTTP request to be sent to the target web server. It formats the request line and adds necessary headers before writing them to the server&apos;s socket.
+-   **`void do_response(int connfd, int clientfd)`**: Handles reading the entire HTTP response from the web server and writing it byte-for-byte to the client&apos;s socket.
+-   **`int parse_uri(char *uri, char *uri_ptos, char *host, char *port)`**: A utility function that takes a full URI string (e.g., `http://www.example.com:8080/path/to/resource`) and extracts the host (`www.example.com`), port (`8080` or default `80`), and the path to the resource (`/path/to/resource`).
+
+## Data Structures
+
+The `proxy.c` implementation primarily relies on standard C data types and a few specialized structures:
+
+-   **`sockaddr_storage`**: A generic structure used to store socket address information for both IPv4 and IPv6, ensuring compatibility.
+-   **`pthread_t`**: The POSIX thread identifier, used to manage and reference individual client-handling threads.
+-   **`rio_t`**: A robust I/O buffer structure (likely from a custom `csapp.h` library) designed for reliable reading and writing to sockets, handling short counts and ensuring all data is transferred.
+-   **Character Arrays (`char buf[MAXLINE]`,&amp;#32;`char host[MAXLINE]`, etc.)**: Extensively used for buffering HTTP request/response lines, headers, and for storing parsed components like hostnames, URIs, and port numbers.
+
+## HTTP Request and Response Handling Flow
+
+1.  **Client Request**: A client sends an HTTP GET request (e.g., `GET http://www.example.com/index.html HTTP/1.0`) to the proxy.
+2.  **URI Parsing**: The `parse_uri` function is invoked to extract `www.example.com` as the host, `80` (the default HTTP port) as the port, and `/index.html` as the path for the web server.
+3.  **Server Connection**: The proxy establishes a new TCP connection to `www.example.com` on port `80`.
+4.  **Proxy Request to Server**: The `do_request` function constructs a modified request (e.g., `GET /index.html HTTP/1.0` along with proxy-specific headers) and sends it to `www.example.com`.
+5.  **Server Response**: The proxy receives the complete HTTP response (status line, headers, and body) from `www.example.com`.
+6.  **Proxy Response to Client**: The `do_response` function reads this entire response and forwards it back to the original client.
+7.  **Connection Closure**: Both the client-proxy and proxy-server connections are closed, and the handling thread terminates." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5" vertex="1" parent="f463d6d4-wrapper">
+                      <mxGeometry x="2098.554166666667" y="657.5" width="2484" height="896" as="geometry"/>
+                    </mxCell>
+<mxCell id="f463d6d4-DS1" value="**sockaddr\_storage**
+Generic socket address" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5" vertex="1" parent="f463d6d4-DataStructures">
+                      <mxGeometry x="328" y="164" width="159" height="65" as="geometry"/>
+                    </mxCell>
+<mxCell id="f463d6d4-DS2" value="**pthread\_t**
+POSIX thread identifier" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5" vertex="1" parent="f463d6d4-DataStructures">
+                      <mxGeometry x="507" y="164" width="155" height="65" as="geometry"/>
+                    </mxCell>
+<mxCell id="f463d6d4-DS3" value="**rio\_t**
+Robust I/O buffer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5" vertex="1" parent="f463d6d4-DataStructures">
+                      <mxGeometry x="20" y="164" width="120" height="65" as="geometry"/>
+                    </mxCell>
+<mxCell id="f463d6d4-DS4" value="**char Arrays**
+Buffers for HTTP data" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5" vertex="1" parent="f463d6d4-DataStructures">
+                      <mxGeometry x="160" y="164" width="148" height="65" as="geometry"/>
+                    </mxCell>
+<mxCell id="f463d6d4-EC" value="**Client**
+Originates HTTP GET requests" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5" vertex="1" parent="f463d6d4-ExternalEntities">
+                      <mxGeometry x="200" y="124" width="201" height="65" as="geometry"/>
+                    </mxCell>
+<mxCell id="f463d6d4-EWS" value="**Web Server**
+Serves content to proxy" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5" vertex="1" parent="f463d6d4-ExternalEntities">
+                      <mxGeometry x="20" y="124" width="160" height="65" as="geometry"/>
+                    </mxCell>
+<mxCell id="f463d6d4-PM1" value="**main()**
+Program Entry Point" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5" vertex="1" parent="f463d6d4-ProxyMainProcess">
+                      <mxGeometry x="689.7333333333332" y="124" width="137" height="65" as="geometry"/>
+                    </mxCell>
+<mxCell id="f463d6d4-PM2" value="**Listening Socket**
+Binds to port, awaits connections" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5" vertex="1" parent="f463d6d4-ProxyMainProcess">
+                      <mxGeometry x="851.1083333333332" y="229" width="217" height="65" as="geometry"/>
+                    </mxCell>
+<mxCell id="f463d6d4-PM3" value="**Accepted Client Connection FD**
+File descriptor for client socket" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5" vertex="1" parent="f463d6d4-ProxyMainProcess">
+                      <mxGeometry x="791.8583333333332" y="334" width="217" height="65" as="geometry"/>
+                    </mxCell>
+<mxCell id="f463d6d4-UF1" value="**parse\_uri(char \*uri, ...)**
+Extracts host, port, path from URI" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5" vertex="1" parent="f463d6d4-UtilityFunctions">
+                      <mxGeometry x="587" y="124" width="219" height="65" as="geometry"/>
+                    </mxCell>
+<mxCell id="f463d6d4-UF2" value="**do\_request(int clientfd, ...)**
+Formats and sends HTTP request to server" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5" vertex="1" parent="f463d6d4-UtilityFunctions">
+                      <mxGeometry x="291" y="124" width="276" height="65" as="geometry"/>
+                    </mxCell>
+<mxCell id="f463d6d4-UF3" value="**do\_response(int connfd, ...)**
+Reads server response, writes to client" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5" vertex="1" parent="f463d6d4-UtilityFunctions">
+                      <mxGeometry x="20" y="124" width="251" height="65" as="geometry"/>
+                    </mxCell>
+<mxCell id="f463d6d4-CH1" value="**thread(void \*vargp)**
+Thread entry function" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5" vertex="1" parent="f463d6d4-CHT1">
+                      <mxGeometry x="197.23333333333335" y="398.5" width="147" height="65" as="geometry"/>
+                    </mxCell>
+<mxCell id="f463d6d4-CH2" value="**do\_it(int connfd)**
+Core transaction logic" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5" vertex="1" parent="f463d6d4-CHT1">
+                      <mxGeometry x="57.03333333333329" y="124" width="149" height="65" as="geometry"/>
+                    </mxCell>
+<mxCell id="f463d6d4-RP1" value="**Read Client Request**
+Reads HTTP request line and headers" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5" vertex="1" parent="f463d6d4-RequestProcessing">
+                      <mxGeometry x="55.75" y="124" width="244" height="65" as="geometry"/>
+                    </mxCell>
+<mxCell id="f463d6d4-RP2" value="**Parse Client URI**
+Extracts host, port, path" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5" vertex="1" parent="f463d6d4-RequestProcessing">
+                      <mxGeometry x="20" y="229" width="163" height="65" as="geometry"/>
+                    </mxCell>
+<mxCell id="f463d6d4-RR1" value="**Relay Server Response**
+Sends response back to client" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5" vertex="1" parent="f463d6d4-ResponseRelaying">
+                      <mxGeometry x="20" y="124" width="198" height="65" as="geometry"/>
+                    </mxCell>
+<mxCell id="f463d6d4-SI1" value="**Connect to Web Server**
+Establishes TCP connection" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5" vertex="1" parent="f463d6d4-ServerInteraction">
+                      <mxGeometry x="149" y="124" width="184" height="65" as="geometry"/>
+                    </mxCell>
+<mxCell id="f463d6d4-SI2" value="**Construct and Forward Request**
+Formats new HTTP/1.0 GET request" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5" vertex="1" parent="f463d6d4-ServerInteraction">
+                      <mxGeometry x="20" y="229" width="231" height="65" as="geometry"/>
+                    </mxCell>
+<mxCell id="f463d6d4-SI3" value="**Receive Server Response**
+Reads full HTTP response" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5" vertex="1" parent="f463d6d4-ServerInteraction">
+                      <mxGeometry x="180.875" y="334" width="179" height="65" as="geometry"/>
+                    </mxCell>
+                <mxCell id="edge-f463d6d4-L_PM1_PM2_0" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#808080;strokeWidth=2;jumpStyle=arc;jumpSize=10;spacing=15;labelBackgroundColor=white;labelBorderColor=none" edge="1" parent="1" source="f463d6d4-PM1" target="f463d6d4-PM2">
+                    <mxGeometry relative="1" as="geometry"/>
+                  </mxCell>
+                  <mxCell id="edge-f463d6d4-L_PM1_PM2_0_label" value="Initializes &amp; Listens on" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="edge-f463d6d4-L_PM1_PM2_0">
+                    <mxGeometry x="-0.2" y="10" relative="1" as="geometry">
+                      <mxPoint as="offset"/>
+                    </mxGeometry>
+                  </mxCell>
+<mxCell id="edge-f463d6d4-L_PM2_PM3_1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#808080;strokeWidth=2;jumpStyle=arc;jumpSize=10;spacing=15;labelBackgroundColor=white;labelBorderColor=none" edge="1" parent="1" source="f463d6d4-PM2" target="f463d6d4-PM3">
+                    <mxGeometry relative="1" as="geometry"/>
+                  </mxCell>
+                  <mxCell id="edge-f463d6d4-L_PM2_PM3_1_label" value="Accepts incoming connection" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="edge-f463d6d4-L_PM2_PM3_1">
+                    <mxGeometry x="-0.2" y="10" relative="1" as="geometry">
+                      <mxPoint as="offset"/>
+                    </mxGeometry>
+                  </mxCell>
+<mxCell id="edge-f463d6d4-L_PM1_CHT1_2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#808080;strokeWidth=2;jumpStyle=arc;jumpSize=10;spacing=15;labelBackgroundColor=white;labelBorderColor=none" edge="1" parent="1" source="f463d6d4-PM1" target="f463d6d4-CHT1">
+                    <mxGeometry relative="1" as="geometry"/>
+                  </mxCell>
+                  <mxCell id="edge-f463d6d4-L_PM1_CHT1_2_label" value="Spawns new thread for" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="edge-f463d6d4-L_PM1_CHT1_2">
+                    <mxGeometry x="-0.2" y="10" relative="1" as="geometry">
+                      <mxPoint as="offset"/>
+                    </mxGeometry>
+                  </mxCell>
+<mxCell id="edge-f463d6d4-L_CH1_CH2_3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#808080;strokeWidth=2;jumpStyle=arc;jumpSize=10;spacing=15;labelBackgroundColor=white;labelBorderColor=none" edge="1" parent="1" source="f463d6d4-CH1" target="f463d6d4-CH2">
+                    <mxGeometry relative="1" as="geometry"/>
+                  </mxCell>
+                  <mxCell id="edge-f463d6d4-L_CH1_CH2_3_label" value="Calls" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="edge-f463d6d4-L_CH1_CH2_3">
+                    <mxGeometry x="-0.2" y="10" relative="1" as="geometry">
+                      <mxPoint as="offset"/>
+                    </mxGeometry>
+                  </mxCell>
+<mxCell id="edge-f463d6d4-L_CH2_RP1_4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#808080;strokeWidth=2;jumpStyle=arc;jumpSize=10;spacing=15;labelBackgroundColor=white;labelBorderColor=none" edge="1" parent="1" source="f463d6d4-CH2" target="f463d6d4-RP1">
+                    <mxGeometry relative="1" as="geometry"/>
+                  </mxCell>
+                  <mxCell id="edge-f463d6d4-L_CH2_RP1_4_label" value="Initiates" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="edge-f463d6d4-L_CH2_RP1_4">
+                    <mxGeometry x="-0.2" y="10" relative="1" as="geometry">
+                      <mxPoint as="offset"/>
+                    </mxGeometry>
+                  </mxCell>
+<mxCell id="edge-f463d6d4-L_RP1_RP2_5" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#808080;strokeWidth=2;jumpStyle=arc;jumpSize=10;spacing=15;labelBackgroundColor=white;labelBorderColor=none" edge="1" parent="1" source="f463d6d4-RP1" target="f463d6d4-RP2">
+                    <mxGeometry relative="1" as="geometry"/>
+                  </mxCell>
+                  <mxCell id="edge-f463d6d4-L_RP1_RP2_5_label" value="Feeds data to" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="edge-f463d6d4-L_RP1_RP2_5">
+                    <mxGeometry x="-0.2" y="10" relative="1" as="geometry">
+                      <mxPoint as="offset"/>
+                    </mxGeometry>
+                  </mxCell>
+<mxCell id="edge-f463d6d4-L_RP2_SI1_6" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#808080;strokeWidth=2;jumpStyle=arc;jumpSize=10;spacing=15;labelBackgroundColor=white;labelBorderColor=none" edge="1" parent="1" source="f463d6d4-RP2" target="f463d6d4-SI1">
+                    <mxGeometry relative="1" as="geometry"/>
+                  </mxCell>
+                  <mxCell id="edge-f463d6d4-L_RP2_SI1_6_label" value="Provides parsed data for" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="edge-f463d6d4-L_RP2_SI1_6">
+                    <mxGeometry x="-0.2" y="10" relative="1" as="geometry">
+                      <mxPoint as="offset"/>
+                    </mxGeometry>
+                  </mxCell>
+<mxCell id="edge-f463d6d4-L_CH2_SI1_7" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#808080;strokeWidth=2;jumpStyle=arc;jumpSize=10;spacing=15;labelBackgroundColor=white;labelBorderColor=none" edge="1" parent="1" source="f463d6d4-CH2" target="f463d6d4-SI1">
+                    <mxGeometry relative="1" as="geometry"/>
+                  </mxCell>
+                  <mxCell id="edge-f463d6d4-L_CH2_SI1_7_label" value="Establishes" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="edge-f463d6d4-L_CH2_SI1_7">
+                    <mxGeometry x="-0.2" y="10" relative="1" as="geometry">
+                      <mxPoint as="offset"/>
+                    </mxGeometry>
+                  </mxCell>
+<mxCell id="edge-f463d6d4-L_SI1_SI2_8" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#808080;strokeWidth=2;jumpStyle=arc;jumpSize=10;spacing=15;labelBackgroundColor=white;labelBorderColor=none" edge="1" parent="1" source="f463d6d4-SI1" target="f463d6d4-SI2">
+                    <mxGeometry relative="1" as="geometry"/>
+                  </mxCell>
+                  <mxCell id="edge-f463d6d4-L_SI1_SI2_8_label" value="Sends request via" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="edge-f463d6d4-L_SI1_SI2_8">
+                    <mxGeometry x="-0.2" y="10" relative="1" as="geometry">
+                      <mxPoint as="offset"/>
+                    </mxGeometry>
+                  </mxCell>
+<mxCell id="edge-f463d6d4-L_SI2_SI3_9" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#808080;strokeWidth=2;jumpStyle=arc;jumpSize=10;spacing=15;labelBackgroundColor=white;labelBorderColor=none" edge="1" parent="1" source="f463d6d4-SI2" target="f463d6d4-SI3">
+                    <mxGeometry relative="1" as="geometry"/>
+                  </mxCell>
+                  <mxCell id="edge-f463d6d4-L_SI2_SI3_9_label" value="Awaits response from" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="edge-f463d6d4-L_SI2_SI3_9">
+                    <mxGeometry x="-0.2" y="10" relative="1" as="geometry">
+                      <mxPoint as="offset"/>
+                    </mxGeometry>
+                  </mxCell>
+<mxCell id="edge-f463d6d4-L_SI3_RR1_10" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#808080;strokeWidth=2;jumpStyle=arc;jumpSize=10;spacing=15;labelBackgroundColor=white;labelBorderColor=none" edge="1" parent="1" source="f463d6d4-SI3" target="f463d6d4-RR1">
+                    <mxGeometry relative="1" as="geometry"/>
+                  </mxCell>
+                  <mxCell id="edge-f463d6d4-L_SI3_RR1_10_label" value="Feeds data to" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="edge-f463d6d4-L_SI3_RR1_10">
+                    <mxGeometry x="-0.2" y="10" relative="1" as="geometry">
+                      <mxPoint as="offset"/>
+                    </mxGeometry>
+                  </mxCell>
+<mxCell id="edge-f463d6d4-L_RR1_CH2_11" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#808080;strokeWidth=2;jumpStyle=arc;jumpSize=10;spacing=15;labelBackgroundColor=white;labelBorderColor=none" edge="1" parent="1" source="f463d6d4-RR1" target="f463d6d4-CH2">
+                    <mxGeometry relative="1" as="geometry"/>
+                  </mxCell>
+                  <mxCell id="edge-f463d6d4-L_RR1_CH2_11_label" value="Completes transaction" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="edge-f463d6d4-L_RR1_CH2_11">
+                    <mxGeometry x="-0.2" y="10" relative="1" as="geometry">
+                      <mxPoint as="offset"/>
+                    </mxGeometry>
+                  </mxCell>
+<mxCell id="edge-f463d6d4-L_CH2_CH1_12" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#808080;strokeWidth=2;jumpStyle=arc;jumpSize=10;spacing=15;labelBackgroundColor=white;labelBorderColor=none" edge="1" parent="1" source="f463d6d4-CH2" target="f463d6d4-CH1">
+                    <mxGeometry relative="1" as="geometry"/>
+                  </mxCell>
+                  <mxCell id="edge-f463d6d4-L_CH2_CH1_12_label" value="Closes connections &amp; Exits" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="edge-f463d6d4-L_CH2_CH1_12">
+                    <mxGeometry x="-0.2" y="10" relative="1" as="geometry">
+                      <mxPoint as="offset"/>
+                    </mxGeometry>
+                  </mxCell>
+<mxCell id="edge-f463d6d4-L_EC_PM2_13" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#808080;strokeWidth=2;jumpStyle=arc;jumpSize=10;spacing=15;labelBackgroundColor=white;labelBorderColor=none" edge="1" parent="1" source="f463d6d4-EC" target="f463d6d4-PM2">
+                    <mxGeometry relative="1" as="geometry"/>
+                  </mxCell>
+                  <mxCell id="edge-f463d6d4-L_EC_PM2_13_label" value="Sends HTTP GET Request" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="edge-f463d6d4-L_EC_PM2_13">
+                    <mxGeometry x="-0.2" y="10" relative="1" as="geometry">
+                      <mxPoint as="offset"/>
+                    </mxGeometry>
+                  </mxCell>
+<mxCell id="edge-f463d6d4-L_PM3_CH1_14" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#808080;strokeWidth=2;jumpStyle=arc;jumpSize=10;spacing=15;labelBackgroundColor=white;labelBorderColor=none" edge="1" parent="1" source="f463d6d4-PM3" target="f463d6d4-CH1">
+                    <mxGeometry relative="1" as="geometry"/>
+                  </mxCell>
+                  <mxCell id="edge-f463d6d4-L_PM3_CH1_14_label" value="Passed to" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="edge-f463d6d4-L_PM3_CH1_14">
+                    <mxGeometry x="-0.2" y="10" relative="1" as="geometry">
+                      <mxPoint as="offset"/>
+                    </mxGeometry>
+                  </mxCell>
+<mxCell id="edge-f463d6d4-L_CH2_UF1_15" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#808080;strokeWidth=2;jumpStyle=arc;jumpSize=10;spacing=15;labelBackgroundColor=white;labelBorderColor=none" edge="1" parent="1" source="f463d6d4-CH2" target="f463d6d4-UF1">
+                    <mxGeometry relative="1" as="geometry"/>
+                  </mxCell>
+                  <mxCell id="edge-f463d6d4-L_CH2_UF1_15_label" value="Uses" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="edge-f463d6d4-L_CH2_UF1_15">
+                    <mxGeometry x="-0.2" y="10" relative="1" as="geometry">
+                      <mxPoint as="offset"/>
+                    </mxGeometry>
+                  </mxCell>
+<mxCell id="edge-f463d6d4-L_CH2_UF2_16" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#808080;strokeWidth=2;jumpStyle=arc;jumpSize=10;spacing=15;labelBackgroundColor=white;labelBorderColor=none" edge="1" parent="1" source="f463d6d4-CH2" target="f463d6d4-UF2">
+                    <mxGeometry relative="1" as="geometry"/>
+                  </mxCell>
+                  <mxCell id="edge-f463d6d4-L_CH2_UF2_16_label" value="Uses" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="edge-f463d6d4-L_CH2_UF2_16">
+                    <mxGeometry x="-0.2" y="10" relative="1" as="geometry">
+                      <mxPoint as="offset"/>
+                    </mxGeometry>
+                  </mxCell>
+<mxCell id="edge-f463d6d4-L_CH2_UF3_17" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#808080;strokeWidth=2;jumpStyle=arc;jumpSize=10;spacing=15;labelBackgroundColor=white;labelBorderColor=none" edge="1" parent="1" source="f463d6d4-CH2" target="f463d6d4-UF3">
+                    <mxGeometry relative="1" as="geometry"/>
+                  </mxCell>
+                  <mxCell id="edge-f463d6d4-L_CH2_UF3_17_label" value="Uses" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="edge-f463d6d4-L_CH2_UF3_17">
+                    <mxGeometry x="-0.2" y="10" relative="1" as="geometry">
+                      <mxPoint as="offset"/>
+                    </mxGeometry>
+                  </mxCell>
+<mxCell id="edge-f463d6d4-L_RP1_DS3_18" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#808080;strokeWidth=2;jumpStyle=arc;jumpSize=10;spacing=15;labelBackgroundColor=white;labelBorderColor=none" edge="1" parent="1" source="f463d6d4-RP1" target="f463d6d4-DS3">
+                    <mxGeometry relative="1" as="geometry"/>
+                  </mxCell>
+                  <mxCell id="edge-f463d6d4-L_RP1_DS3_18_label" value="Uses" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="edge-f463d6d4-L_RP1_DS3_18">
+                    <mxGeometry x="-0.2" y="10" relative="1" as="geometry">
+                      <mxPoint as="offset"/>
+                    </mxGeometry>
+                  </mxCell>
+<mxCell id="edge-f463d6d4-L_SI3_DS3_19" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#808080;strokeWidth=2;jumpStyle=arc;jumpSize=10;spacing=15;labelBackgroundColor=white;labelBorderColor=none" edge="1" parent="1" source="f463d6d4-SI3" target="f463d6d4-DS3">
+                    <mxGeometry relative="1" as="geometry"/>
+                  </mxCell>
+                  <mxCell id="edge-f463d6d4-L_SI3_DS3_19_label" value="Uses" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="edge-f463d6d4-L_SI3_DS3_19">
+                    <mxGeometry x="-0.2" y="10" relative="1" as="geometry">
+                      <mxPoint as="offset"/>
+                    </mxGeometry>
+                  </mxCell>
+<mxCell id="edge-f463d6d4-L_RR1_DS3_20" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#808080;strokeWidth=2;jumpStyle=arc;jumpSize=10;spacing=15;labelBackgroundColor=white;labelBorderColor=none" edge="1" parent="1" source="f463d6d4-RR1" target="f463d6d4-DS3">
+                    <mxGeometry relative="1" as="geometry"/>
+                  </mxCell>
+                  <mxCell id="edge-f463d6d4-L_RR1_DS3_20_label" value="Uses" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="edge-f463d6d4-L_RR1_DS3_20">
+                    <mxGeometry x="-0.2" y="10" relative="1" as="geometry">
+                      <mxPoint as="offset"/>
+                    </mxGeometry>
+                  </mxCell>
+<mxCell id="edge-f463d6d4-L_CH2_EWS_21" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#808080;strokeWidth=2;jumpStyle=arc;jumpSize=10;spacing=15;labelBackgroundColor=white;labelBorderColor=none" edge="1" parent="1" source="f463d6d4-CH2" target="f463d6d4-EWS">
+                    <mxGeometry relative="1" as="geometry"/>
+                  </mxCell>
+                  <mxCell id="edge-f463d6d4-L_CH2_EWS_21_label" value="Connects to" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="edge-f463d6d4-L_CH2_EWS_21">
+                    <mxGeometry x="-0.2" y="10" relative="1" as="geometry">
+                      <mxPoint as="offset"/>
+                    </mxGeometry>
+                  </mxCell>
+<mxCell id="edge-f463d6d4-L_SI2_EWS_22" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#808080;strokeWidth=2;jumpStyle=arc;jumpSize=10;spacing=15;labelBackgroundColor=white;labelBorderColor=none" edge="1" parent="1" source="f463d6d4-SI2" target="f463d6d4-EWS">
+                    <mxGeometry relative="1" as="geometry"/>
+                  </mxCell>
+                  <mxCell id="edge-f463d6d4-L_SI2_EWS_22_label" value="Sends to" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="edge-f463d6d4-L_SI2_EWS_22">
+                    <mxGeometry x="-0.2" y="10" relative="1" as="geometry">
+                      <mxPoint as="offset"/>
+                    </mxGeometry>
+                  </mxCell>
+<mxCell id="edge-f463d6d4-L_EWS_SI3_23" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#808080;strokeWidth=2;jumpStyle=arc;jumpSize=10;spacing=15;labelBackgroundColor=white;labelBorderColor=none" edge="1" parent="1" source="f463d6d4-EWS" target="f463d6d4-SI3">
+                    <mxGeometry relative="1" as="geometry"/>
+                  </mxCell>
+                  <mxCell id="edge-f463d6d4-L_EWS_SI3_23_label" value="Responds to" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="edge-f463d6d4-L_EWS_SI3_23">
+                    <mxGeometry x="-0.2" y="10" relative="1" as="geometry">
+                      <mxPoint as="offset"/>
+                    </mxGeometry>
+                  </mxCell>
+<mxCell id="edge-f463d6d4-L_RR1_EC_24" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#808080;strokeWidth=2;jumpStyle=arc;jumpSize=10;spacing=15;labelBackgroundColor=white;labelBorderColor=none" edge="1" parent="1" source="f463d6d4-RR1" target="f463d6d4-EC">
+                    <mxGeometry relative="1" as="geometry"/>
+                  </mxCell>
+                  <mxCell id="edge-f463d6d4-L_RR1_EC_24_label" value="Sends to" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="edge-f463d6d4-L_RR1_EC_24">
+                    <mxGeometry x="-0.2" y="10" relative="1" as="geometry">
+                      <mxPoint as="offset"/>
+                    </mxGeometry>
+                  </mxCell>
+<mxCell id="edge-f463d6d4-L_PM1_DS2_25" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#808080;strokeWidth=2;jumpStyle=arc;jumpSize=10;spacing=15;labelBackgroundColor=white;labelBorderColor=none" edge="1" parent="1" source="f463d6d4-PM1" target="f463d6d4-DS2">
+                    <mxGeometry relative="1" as="geometry"/>
+                  </mxCell>
+                  <mxCell id="edge-f463d6d4-L_PM1_DS2_25_label" value="Manages" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="edge-f463d6d4-L_PM1_DS2_25">
+                    <mxGeometry x="-0.2" y="10" relative="1" as="geometry">
+                      <mxPoint as="offset"/>
+                    </mxGeometry>
+                  </mxCell>
+<mxCell id="edge-f463d6d4-L_PM2_DS1_26" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#808080;strokeWidth=2;jumpStyle=arc;jumpSize=10;spacing=15;labelBackgroundColor=white;labelBorderColor=none" edge="1" parent="1" source="f463d6d4-PM2" target="f463d6d4-DS1">
+                    <mxGeometry relative="1" as="geometry"/>
+                  </mxCell>
+                  <mxCell id="edge-f463d6d4-L_PM2_DS1_26_label" value="Uses" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="edge-f463d6d4-L_PM2_DS1_26">
+                    <mxGeometry x="-0.2" y="10" relative="1" as="geometry">
+                      <mxPoint as="offset"/>
+                    </mxGeometry>
+                  </mxCell>
+<mxCell id="edge-f463d6d4-L_SI1_DS1_27" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#808080;strokeWidth=2;jumpStyle=arc;jumpSize=10;spacing=15;labelBackgroundColor=white;labelBorderColor=none" edge="1" parent="1" source="f463d6d4-SI1" target="f463d6d4-DS1">
+                    <mxGeometry relative="1" as="geometry"/>
+                  </mxCell>
+                  <mxCell id="edge-f463d6d4-L_SI1_DS1_27_label" value="Uses" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="edge-f463d6d4-L_SI1_DS1_27">
+                    <mxGeometry x="-0.2" y="10" relative="1" as="geometry">
+                      <mxPoint as="offset"/>
+                    </mxGeometry>
+                  </mxCell>
+<mxCell id="edge-f463d6d4-L_RP1_DS4_28" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#808080;strokeWidth=2;jumpStyle=arc;jumpSize=10;spacing=15;labelBackgroundColor=white;labelBorderColor=none" edge="1" parent="1" source="f463d6d4-RP1" target="f463d6d4-DS4">
+                    <mxGeometry relative="1" as="geometry"/>
+                  </mxCell>
+                  <mxCell id="edge-f463d6d4-L_RP1_DS4_28_label" value="Buffers with" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="edge-f463d6d4-L_RP1_DS4_28">
+                    <mxGeometry x="-0.2" y="10" relative="1" as="geometry">
+                      <mxPoint as="offset"/>
+                    </mxGeometry>
+                  </mxCell>
+<mxCell id="edge-f463d6d4-L_SI2_DS4_29" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#808080;strokeWidth=2;jumpStyle=arc;jumpSize=10;spacing=15;labelBackgroundColor=white;labelBorderColor=none" edge="1" parent="1" source="f463d6d4-SI2" target="f463d6d4-DS4">
+                    <mxGeometry relative="1" as="geometry"/>
+                  </mxCell>
+                  <mxCell id="edge-f463d6d4-L_SI2_DS4_29_label" value="Buffers with" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="edge-f463d6d4-L_SI2_DS4_29">
+                    <mxGeometry x="-0.2" y="10" relative="1" as="geometry">
+                      <mxPoint as="offset"/>
+                    </mxGeometry>
+                  </mxCell>
+<mxCell id="edge-f463d6d4-L_SI3_DS4_30" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#808080;strokeWidth=2;jumpStyle=arc;jumpSize=10;spacing=15;labelBackgroundColor=white;labelBorderColor=none" edge="1" parent="1" source="f463d6d4-SI3" target="f463d6d4-DS4">
+                    <mxGeometry relative="1" as="geometry"/>
+                  </mxCell>
+                  <mxCell id="edge-f463d6d4-L_SI3_DS4_30_label" value="Buffers with" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="edge-f463d6d4-L_SI3_DS4_30">
+                    <mxGeometry x="-0.2" y="10" relative="1" as="geometry">
+                      <mxPoint as="offset"/>
+                    </mxGeometry>
+                  </mxCell>
+<mxCell id="edge-f463d6d4-L_RR1_DS4_31" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#808080;strokeWidth=2;jumpStyle=arc;jumpSize=10;spacing=15;labelBackgroundColor=white;labelBorderColor=none" edge="1" parent="1" source="f463d6d4-RR1" target="f463d6d4-DS4">
+                    <mxGeometry relative="1" as="geometry"/>
+                  </mxCell>
+                  <mxCell id="edge-f463d6d4-L_RR1_DS4_31_label" value="Buffers with" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="edge-f463d6d4-L_RR1_DS4_31">
+                    <mxGeometry x="-0.2" y="10" relative="1" as="geometry">
+                      <mxPoint as="offset"/>
+                    </mxGeometry>
+                  </mxCell>
+              </root>
+            </mxGraphModel>
+          </diagram>
+        </mxfile>

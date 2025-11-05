@@ -31,13 +31,13 @@ void *thread(void *vargp); // vargp: void argument pointer
 int main(int argc, char **argv)
 {
   // #region 변수 선언부
-  int listenfd, *connfdp;
+  int listenfd = 0, *connfdp = NULL;
   char hostname[MAXLINE], port[MAXLINE];
 
   /* 소켓주소 구조체의 길이를 나타내는 전용데이터 타입. 부호없는 32비트 이상의 정수 */
   socklen_t clientlen;
   /* 범용 소켓 주소 구조체 */
-  struct sockaddr_storage cliendtaddr;
+  struct sockaddr_storage cliendtaddr = {};
   /* 스레드를 식별하기 위한 데이터 타입 */
   pthread_t tid;
   // #endregion
@@ -95,9 +95,8 @@ void *thread(void *vargp)
 void do_it(int connfd)
 {
   // #region 변수 선언부
-  int clientfd;
-  char buf[MAXLINE], host[MAXLINE], port[MAXLINE], method[MAXLINE], uri[MAXLINE], version[MAXLINE];
-  char uri_ptos[MAXLINE];
+  int clientfd = 0;
+  char buf[MAXLINE], host[MAXLINE], port[MAXLINE], method[MAXLINE], uri[MAXLINE], version[MAXLINE], uri_ptos[MAXLINE];
   rio_t rio;
   // #endregion
 
@@ -172,7 +171,7 @@ void do_response(int connfd, int clientfd)
 
 int parse_uri(char *uri, char *uri_ptos, char *host, char *port)
 {
-  char *ptr;
+  char *ptr = NULL;
 
   /*============= 👷 1. URI에서 필요한 데이터 추출 =============*/
   printf("👷 1. URI에서 필요한 데이터 추출\n");

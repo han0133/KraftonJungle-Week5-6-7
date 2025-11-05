@@ -2,7 +2,7 @@
 
 int main(void)
 {
-  char *buf, *p;
+  char *buf = NULL, *p = NULL;
   char arg1[MAXLINE], arg2[MAXLINE], content[MAXLINE];
   int n1 = 0, n2 = 0;
 
